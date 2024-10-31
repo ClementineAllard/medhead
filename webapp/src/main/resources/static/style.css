@@ -33,7 +33,7 @@ Version:	1.1
 	+ Latest Blog CSS
 	+ Blog Single CSS
 	+ Blog Sidebar CSS
-* Appointment CSS
+* research CSS
 * Login CSS
 * Register CSS
 * Faq CSS
@@ -2682,33 +2682,33 @@ body{
 =====================*/
 
 /*==========================
-	Start Appointment CSS
+	Start research CSS
 ============================*/
-.appointment{
+.research{
 	background:#fff;
 	padding-top:100px;
 }
-.appointment.single-page {
+.research.single-page {
 	background: #fff;
 	padding-top: 100px 0;
 	padding: 0;
 	padding: 100px 0;
 }
-.appointment.single-page .appointment-inner {
+.research.single-page .research-inner {
 	padding: 40px;
 	box-shadow: 0px 0px 10px #00000024;
 	border-radius: 5px;
 }
-.appointment.single-page .title h3 {
+.research.single-page .title h3 {
 	font-size: 25px;
 	display: block;
 	margin-bottom: 10px;
 	font-weight:600;
 }
-.appointment .form{
+.research .form{
 	margin-top:30px;
 }
-.appointment .form input {
+.research .form input {
 	width: 100%;
 	height: 50px;
 	border: 1px solid #eee;
@@ -2720,7 +2720,7 @@ body{
 	border-radius:0;
 	border-radius: 4px;
 }
-.appointment .form textarea{
+.research .form textarea{
 	width: 100%;
 	height:200px;
     padding: 18px;
@@ -2729,7 +2729,7 @@ body{
 	resize:none;
 	border-radius: 4px;
 }
-.appointment .form-group .nice-select{
+.research .form-group .nice-select{
 	width: 100%;
 	height: 50px;
 	line-height: 50px;
@@ -2742,72 +2742,72 @@ body{
 	border-radius: 4px;
 	font-weight:400;
 }
-.appointment .form-group .nice-select::after {
+.research .form-group .nice-select::after {
 	right: 20px;
 	color: #757575;
 }
-.appointment .form-group .list{
+.research .form-group .list{
 	border-radius: 4px;
 }
-.appointment .form-group .list li{
+.research .form-group .list li{
 	color:#757575;
 	border-radius:0;
 }
-.appointment .form-group .list li.selected{
+.research .form-group .list li.selected{
 	color:#757575;
 	font-weight:400;
 }
-.appointment .form-group .list li:hover {
+.research .form-group .list li:hover {
 	color:#fff;
 	background: #1A76D1;
 }
-.appointment.single-page .button .btn{
+.research.single-page .button .btn{
 	width:100%;
 }
-.appointment .button .btn{
+.research .button .btn{
 	font-weight:500;
 }
-.appointment .button .btn:hover{
+.research .button .btn:hover{
 	color:#fff;
 }
-.appointment .form p{
+.research .form p{
 	margin-top: 10px;
 	color:#868686;
 }
-.appointment.single-page .work-hour{
+.research.single-page .work-hour{
 	background:#1A76D1;
 	padding: 40px;
 	box-shadow: 0px 0px 10px #00000024;
 	border-radius: 5px;
 }
-.appointment.single-page .work-hour h3 {
+.research.single-page .work-hour h3 {
 	font-size: 25px;
 	display: block;
 	font-weight:600;
 	margin-bottom: 20px;
 	color:#fff;
 }
-.appointment.single-page .time-sidual{
+.research.single-page .time-sidual{
 	margin-top:15px;
 }
-.appointment.single-page .time-sidual{
+.research.single-page .time-sidual{
 	overflow:hidden;
 }
-.appointment.single-page .time-sidual li {
+.research.single-page .time-sidual li {
 	display: block;
 	color: #fff;
 	width: 100%;
 	margin-bottom: 10px;
 }
-.appointment.single-page .time-sidual li span{
+.research.single-page .time-sidual li span{
 	display:inline-block;
 }
-.appointment.single-page .day-head .time {
+.research.single-page .day-head .time {
 	font-weight: 400;
 	float: right;
 }
 /*==========================
-	End Appointment CSS
+	End research CSS
 ============================*/
 
 /*====================
@@ -3197,21 +3197,22 @@ body{
 =======================*/
 
 /*=========================
-   Start Contact Us CSS
+   Start Bloc CSS
 ===========================*/
-.contact-us .inner{
+
+.bloc .inner{
 	box-shadow: 0px 0px 10px #00000024;
 	border-radius: 5px;
 	overflow:hidden;
 }
-.contact-us .contact-us-left{
+.bloc .bloc-left{
     width: 100%;
     height: 100%;
 }
-.contact-us .contact-us-form{
+.bloc .bloc-form{
 	padding:50px 40px;
 }
-.contact-us .contact-us-form h2 {
+.bloc .bloc-form h2 {
 	position: relative;
 	font-size: 32px;
 	color: #333;
@@ -3222,7 +3223,7 @@ body{
 	padding-bottom: 20px;
 	text-align: left;
 }
-.contact-us .contact-us-form h2:before{
+.bloc .bloc-form h2:before{
 	position:absolute;
 	content:"";
 	left:0;
@@ -3231,20 +3232,20 @@ body{
 	width:50px;
 	background:#1A76D1;
 }
-.contact-us .contact-us-form p {
+.bloc .bloc-form p {
 	font-size: 14px;
 	color: #333;
 	font-weight: 400;
 	text-align: left;
 	margin-bottom:50px;
 }
-.contact-us .form {
+.bloc .form {
 	margin-top: 30px;
 }
-.contact-us .form .form-group {
+.bloc .form .form-group {
 	margin-bottom: 22px;
 }
-.contact-us .form .form-group input {
+.bloc .form .form-group input {
 	width: 100%;
 	height: 50px;
 	border: 1px solid #eee;
@@ -3255,7 +3256,7 @@ body{
 	font-weight: 400;
 	border-radius: 4px;
 }
-.contact-us .form .form-group textarea {
+.bloc .form .form-group textarea {
 	width: 100%;
 	height:100px;
 	border: 1px solid #eee;
@@ -3266,44 +3267,44 @@ body{
 	font-weight: 400;
 	border-radius: 4px;
 }
-.contact-us .form .form-group.login-btn {
+.bloc .form .form-group.login-btn {
 	margin: 0;
 }
-.contact-us .form button {
+.bloc .form button {
 	border: none;
 }
-.contact-us .form .btn {
+.bloc .form .btn {
 	display: inline-block;
 	margin-right: 10px;
 	color: #fff;
 	line-height: 20px;
 	width:100%;
 }
-.contact-us .form .btn:hover{
+.bloc .form .btn:hover{
 	background:#1A76D1;
 	color:#fff;
 }
-.contact-us .contact-us-form .checkbox {
+.bloc .bloc-form .checkbox {
 	text-align: left;
 	margin: 0;
 	margin-top: 20px;
 	display:inline-block;
 	
 }
-.contact-us .contact-us-form .checkbox label {
+.bloc .bloc-form .checkbox label {
 	font-size: 14px;
 	font-weight: 400;
 	color: #333;
 	position: relative;
 	padding-left: 20px;
 }
-.contact-us .contact-us-form .checkbox label:hover{
+.bloc .bloc-form .checkbox label:hover{
 	cursor:pointer;
 }
-.contact-us .contact-us-form .checkbox label input{
+.bloc .bloc-form .checkbox label input{
 	display:none;
 }
-.contact-us .contact-us-form .checkbox label::before {
+.bloc .bloc-form .checkbox label::before {
 	position: absolute;
 	content: "";
 	left: 0;
@@ -3313,7 +3314,7 @@ body{
 	border: 1px solid #1A76D1;
 	border-radius: 100%;
 }
-.contact-us .contact-us-form .checkbox label::after {
+.bloc .bloc-form .checkbox label::after {
 	position: relative;
 	content: "";
 	width: 7px;
@@ -3331,15 +3332,15 @@ body{
 	background: #1A76D1;
 	border-radius: 100%;
 }
-.contact-us .contact-us-form .checkbox label.checked::after{
+.bloc .bloc-form .checkbox label.checked::after{
 	opacity:1;
 	visibility:visible;
 	transform:scale(1);
 }
-.contact-us .contact-info{
+.bloc .contact-info{
 	margin-top:50px;
 }
-.contact-us .single-info {
+.bloc .single-info {
 	background: #1a76d1;
 	padding: 40px 60px;
 	height: 150px;
@@ -3351,7 +3352,7 @@ body{
     -o-transition: all .3s ease-out 0s;
     transition: all .3s ease-out 0s;
 }
-.contact-us .single-info:before{
+.bloc .single-info:before{
 	position: absolute;
     z-index: -1;
     content: '';
@@ -3370,38 +3371,73 @@ body{
     -o-transition: all .3s ease-out 0s;
     transition: all .3s ease-out 0s;
 }
-.contact-us .single-info:hover:before{
+.bloc .single-info:hover:before{
 	opacity: 0.8;
 }
-.contact-us .single-info:hover{
+.bloc .single-info:hover{
 	transform: translateY(-5px);
 }
-.contact-us .single-info i{
+.bloc .single-info i{
 	font-size:42px;
 	color:#fff;
 	position:absolute;
 	left:40px;
 }
-.contact-us .single-info .content {
+.bloc .single-info .content {
 	margin-left: 45px;
 }
-.contact-us .single-info .content h3{
+.bloc .single-info .content h3{
 	color:#fff;
 	font-size:18px;
 	font-weight:600;
 	
 }
-.contact-us .single-info .content p{
+.bloc .single-info .content p{
 	color:#fff;
 	margin-top:5px;
 }
 /* Google Map */
-.contact-us #myMap {
+.bloc #myMap {
 	height: 100%;
 	width: 100%;
 }
+
+.bloc .form-group .nice-select{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	border: 1px solid #eee;
+	text-transform: capitalize;
+	padding: 0px 18px;
+	color: #999;
+	font-size: 14px;
+	font-weight:400;
+	border-radius: 4px;
+	font-weight:400;
+}
+.bloc .form-group .nice-select::after {
+	right: 20px;
+	color: #757575;
+}
+.bloc .form-group .list{
+	border-radius: 4px;
+}
+.bloc .form-group .list li{
+	color:#757575;
+	border-radius:0;
+}
+.bloc .form-group .list li.selected{
+	color:#757575;
+	font-weight:400;
+}
+.bloc .form-group .list li:hover {
+	color:#fff;
+	background: #1A7
+}
+
+
 /*=========================
-   End Contact Us CSS
+   End bloc CSS
 ===========================*/
 
 /*========================
