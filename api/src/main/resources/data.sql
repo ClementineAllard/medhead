@@ -1,4 +1,7 @@
 DROP TABLE IF EXISTS utilisateurs;
+DROP TABLE IF EXISTS specialisations;
+DROP TABLE IF EXISTS specialites;
+DROP TABLE IF EXISTS hopitaux;
 
 CREATE TABLE utilisateurs (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -13,7 +16,6 @@ INSERT INTO utilisateurs (email, prenom, nom, mot_de_passe) VALUES
   ('sophiefoncek@mail.com','Sophie', 'FONCEK',  'sophie'),
   ('agathefeeling@mail.com','Agathe', 'FEELING', 'agathe');
 
-DROP TABLE IF EXISTS specialites;
 
 CREATE TABLE specialites (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -126,9 +128,7 @@ INSERT INTO specialites (libelle, code_spec, code_parent) VALUES
   ('Traumatologie et chirurgie orthopédique', '012008', '012000'),
   ('Urologie', '012009', '012000'),
   ('Chirurgie vasculaire', '012010', '012000');
-
-
-DROP TABLE IF EXISTS hopitaux;
+  
 
 CREATE TABLE hopitaux (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -162,12 +162,12 @@ INSERT INTO hopitaux (nom, adresse, ville, code_postal, telephone, nb_lit) VALUE
 ('Centre Médical du Havre', '90 Rue de Normandie', 'Le Havre', '76600', '02 35 22 33 44', 140),
 ('Hôpital Saint-Luc', '16 Rue des Églises', 'Tours', '37000', '02 47 23 45 67', 190);
 
-DROP TABLE IF EXISTS specialisations;
 
 CREATE TABLE specialisations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
   id_hopital INT REFERENCES hopitaux(id),
   code_spec VARCHAR(6) REFERENCES specialites(code_spec),
-  PRIMARY KEY (id_hopital, code_spec)
+  UNIQUE(id_hopital, code_spec)
 );
 
 INSERT INTO specialisations (id_hopital, code_spec) VALUES
@@ -263,5 +263,3 @@ INSERT INTO specialisations (id_hopital, code_spec) VALUES
 (20, '008000'),
 (20, '008007'),
 (20, '005003');
-
-

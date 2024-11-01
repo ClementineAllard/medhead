@@ -12,4 +12,5 @@ public interface SpecialiteRepository extends CrudRepository<Specialite, Long> {
 
     // Rechercher par code parent
     List<Specialite> findByParent(String parent);
+    
 }
