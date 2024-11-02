@@ -19,11 +19,8 @@ public class Specialite {
     private Long id;
 
     private String libelle;
-
-    @Column(name="code_spec", unique = true)
-    private String code;
     
-    @Column(name="code_parent")
-    private String parent;
+    @Column(name="id_parent")
+    private Long parent;
 
 }

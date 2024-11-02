@@ -23,13 +23,13 @@ public class SpecialiteControllerTest {
     public void testGetGroupes() throws Exception {
         mockMvc.perform(get("/groupes"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].code", is("001000")));
+            .andExpect(jsonPath("$[0].id", is(1)));
     }
 
     @Test
     public void testGetSpecialites() throws Exception {
-        mockMvc.perform(get("/specialites/001000"))
+        mockMvc.perform(get("/specialites/1"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].code", is("001001")));
+            .andExpect(jsonPath("$[0].id", is(2)));
     }
 }

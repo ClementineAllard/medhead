@@ -11,6 +11,6 @@ import com.medhead.api.model.Specialite;
 public interface SpecialiteRepository extends CrudRepository<Specialite, Long> {
 
     // Rechercher par code parent
-    List<Specialite> findByParent(String parent);
+    List<Specialite> findByParent(Long parent);
     
 }

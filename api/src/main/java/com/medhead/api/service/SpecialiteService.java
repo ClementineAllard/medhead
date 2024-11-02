@@ -18,10 +18,10 @@ public class SpecialiteService {
     private SpecialiteRepository specialiteRepository;
 
     public List<Specialite> getGroupes() {
-        return specialiteRepository.findByParent("");
+        return specialiteRepository.findByParent(null);
     }
 
-    public List<Specialite> getSpecialites(String parent) {
+    public List<Specialite> getSpecialites(Long parent) {
         return specialiteRepository.findByParent(parent);
     }
 }

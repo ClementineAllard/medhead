@@ -30,7 +30,7 @@ public class SpecialiteController {
 	 * @return - Liste des specialités du groupe
 	 */
 	@GetMapping("/specialites/{parent}")
-	public Iterable<Specialite> getSpecialites(@PathVariable("parent") String parent) {
+	public Iterable<Specialite> getSpecialites(@PathVariable("parent") Long parent) {
 		return specialiteService.getSpecialites(parent);
 	}
 
