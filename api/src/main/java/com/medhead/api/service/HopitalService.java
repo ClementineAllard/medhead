@@ -1,5 +1,7 @@
 package com.medhead.api.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,9 @@ public class HopitalService {
     @Autowired
     private HopitalRepository hopitalRepository;
 
-    public Iterable<Hopital> getHopitaux(Iterable<Long> ids) {
-        return hopitalRepository.findAllById(ids);
+    public Optional<Hopital> getHopital(final Long id) {
+        return hopitalRepository.findById(id);
     }
+
 
 }

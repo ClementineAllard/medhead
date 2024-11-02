@@ -1,7 +1,6 @@
 package com.medhead.api.controller;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,16 +17,18 @@ public class HopitalController {
     private HopitalService hopitalService;
 
     /**
-	 * Read - Récupérer les hopitaux à partir d'ids
-	 * @param ids Liste des ids des hopitaux
-	 * @return - Liste des hopitaux
+	 * Read - Récupérer l'hopital à partir de son id
+	 * @param id Id de l'hopital
+	 * @return - Hopital
 	 */
-	@GetMapping("/hopitaux/{ids}")
-	public Iterable<Hopital> getHopitaux(@PathVariable("ids") String ids) {
-        Iterable<Long> idsList = Arrays.stream(ids.split(","))
-                                  .map(Long::parseLong)
-                                  .collect(Collectors.toList());
-		return hopitalService.getHopitaux(idsList);
+	@GetMapping("/hopital/{id}")
+	public Hopital getHopitaux(@PathVariable("id") final Long id) {
+        Optional<Hopital> hopital = hopitalService.getHopital(id);
+		if(hopital.isPresent()) {
+			return hopital.get();
+		} else {
+			return null;
+		}
 	}
 
 }
