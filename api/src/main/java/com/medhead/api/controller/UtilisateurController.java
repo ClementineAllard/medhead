@@ -17,9 +17,10 @@ public class UtilisateurController {
     private UtilisateurService utilisateurService;
 
     /**
-    * Read - Récupérer les utilisateurs à partir d'un email
-    * @param email Email de l'utilisateur
-    * @return - Liste des utilisateurs
+    * Read - Vérifier que l'utilisateur peut se connecter
+    * @param email email de l'utilisateur
+    * @param mdp mdp saisi par l'utilisateur
+    * @return - vrai si le mdp est correct
     */
     @GetMapping("/utilisateur/{email}/{mdp}")
     public boolean getUtilisateurByEmail(@PathVariable("email") String email, @PathVariable("mdp") String mdp) {
