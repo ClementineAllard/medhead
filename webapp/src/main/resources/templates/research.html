@@ -38,7 +38,6 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="css/responsive.css">
 
-
 </head>
 
 <body>
@@ -50,7 +49,7 @@
 				<div class="row">
 					<!-- Start Logo -->
 					<div class="logo">
-						<a href="home.html"><img src="img/logo.png" alt="#"></a>
+						<a><img src="img/logo.png" alt="#"></a>
 					</div>
 					<!-- End Logo -->		
 				</div>
@@ -65,7 +64,7 @@
 	<section class="bloc">
 		<div class="container">
 				<div class="row justify-content-md-center"> 
-					<div class="col-lg-6">
+					<div class="col-lg-10">
 						<div class="bloc-form">
 							<h2>Recherche</h2>
 							<!-- Form -->
@@ -73,38 +72,30 @@
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="form-group">
-											<input type="text" name="ville" placeholder="Ville" required="">
+											<input type="text" name="ville" placeholder="Ville" tabindex="1" required="">
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
-                                               <div class="nice-select form-control wide" tabindex="0"><span class="current">Groupe</span>
+                                               <div class="nice-select form-control wide" tabindex="2" required=""><span class="current">Groupe</span>
                                                    <ul class="list">
-                                                       <li data-value="1" class="option selected "></li>
-                                                       <li data-value="2" class="option">Cardiac Clinic</li>
-                                                       <li data-value="3" class="option">Neurology</li>
-                                                       <li data-value="4" class="option">Dentistry</li>
-                                                       <li data-value="5" class="option">Gastroenterology</li>
+                                                        <li  th:value=0 class="option" onclick="fChangementGroupe(this.value);"></li>
+                                                        <li  th:each="groupe: ${groupes}" th:value="${groupe.id}" th:text="${groupe.libelle}" class="option" onclick="fChangementGroupe(this.value);"></li>
                                                    </ul>
                                                </div>
                                            </div>
 									</div>
                                     <div class="col-lg-6">
 										<div class="form-group">
-                                               <div class="nice-select form-control disabled wide" tabindex="0"><span class="current">Spécialité</span>
-                                                   <ul class="list">
-                                                       <li data-value="1" class="option selected "></li>
-                                                       <li data-value="2" class="option">Cardiac Clinic</li>
-                                                       <li data-value="3" class="option">Neurology</li>
-                                                       <li data-value="4" class="option">Dentistry</li>
-                                                       <li data-value="5" class="option">Gastroenterology</li>
+                                               <div class="nice-select form-control wide" tabindex="3" required="" id="specialitesSelect" ><span class="current" id="specialiteCourante" >Spécialité</span>
+                                                   <ul class="list" id="specialitesListe">
                                                    </ul>
                                                </div>
                                            </div>
 									</div>
-									<div class="col-12">
+									<div class="col-6" style="display: block; margin: 0 auto;" >
 										<div class="form-group login-btn">
-											<button class="btn" type="submit">Rechercher</button>
+											<button class="btn" type="submit" >Rechercher</button>
 										</div>
 									</div>
 								</div>
@@ -117,7 +108,7 @@
     </section>
 	<!--/ End Recherche -->
 
-    <!-- Start Connexion -->
+    <!-- Start Hopital -->
 		<section class="bloc" >
 			<div class="container">
 				<div class="row justify-content-md-center"> 
@@ -126,7 +117,7 @@
 							<h2>Hopital Fred Brooks</h2>
                             <ul class="list" style="margin-bottom: 20px;">
                                 <li><i class="fa fa-map-marker" style="margin-right: 5px; color: #1A76D1;"></i>25 rue du Four, 54 000 Nancy</li>
-                                <li><i class="fa fa-stethoscope" style="margin-right: 5px; color: #1A76D1;"></i>Cardiologie, autre</li>
+                                <li><i class="fa fa-phone" style="margin-right: 5px; color: #1A76D1;"></i>03 83 53 65 85</li>
                             </ul>
                             <button class="btn" type="submit" style="display: block; margin: 0 auto;">Réserver un lit</button>
 						</div>
@@ -134,7 +125,7 @@
 				</div>
 			</div>
 		</section>
-		<!--/ End Connexion -->
+		<!--/ End Hopital -->
 	
     <!-- Footer Area -->
     <footer id="footer" class="footer">
@@ -153,7 +144,45 @@
 	    <!--/ End Copyright -->
     </footer>
     <!--/ End Footer Area -->
+    
+    <script type="text/javascript" >
 
+        //Recherche des spécialités du groupe sélectionné, appelée lors d'un changement de sélection de groupe
+        function fChangementGroupe(idGroupe) {
+            // On remet à zéro la liste de spécialités
+            $('#specialitesListe').empty();
+            $('#specialiteCourante').empty();
+
+            // Si aucun groupe est sélectionné -> on rend inaccessible la sélection de spécialités et on quitte la fonction
+            if(idGroupe==0){
+                $("#specialitesSelect").prop("disabled", true);
+                return '';
+            } else { // Si un groupe est sélectionné -> on rend accessible la sélection de spécialités
+                $("#specialitesSelect").prop("disabled", false);
+            }
+           
+            // On recherche ensuite la liste des spécialités pour remplir le champ
+            $.ajax({
+                method: "GET",
+                contentType: "application/json",
+                url: "/specialites/"+idGroupe,
+                dataType: 'json',
+                success: function (data) {
+                    // On met un premier champ vide pour qu'il soit possible de ne pas choisir de spécialité
+                    $('#specialitesListe').append('<li value=0 class="option"></li>');
+
+                    // On ajoute toutes les spécialités dans le champ de sélection
+                    data.result.forEach(function(specialite) {
+                        $('#specialitesListe').append('<li value='+ specialite.id +' class="option" >' + specialite.libelle + '</li>');
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Erreur lors du chargement des spécialités :', error);
+                }
+            });
+        }
+
+    </script>
     <!-- jquery Min JS -->
     <script src="js/jquery.min.js"></script>
     <!-- jquery Migrate JS -->
