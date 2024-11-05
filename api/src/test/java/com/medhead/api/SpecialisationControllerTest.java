@@ -37,6 +37,6 @@ public class SpecialisationControllerTest {
         mockMvc.perform(get("/hopitaux/1"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].specialite.libelle", is("Anesthésie")))
-            .andExpect(jsonPath("$[0].hopital", is("Hôpital Saint-Vincent")));
+            .andExpect(jsonPath("$[0].hopital.nom", is("Hôpital Saint-Vincent")));
     }
 }
