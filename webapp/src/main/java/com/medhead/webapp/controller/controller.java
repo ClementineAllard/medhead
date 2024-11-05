@@ -53,10 +53,14 @@ public class controller {
 		    model.addAttribute("groupes", listeGroupes);
 
 			// Envoi à la page de recherche d'hopitaux
+			model.addAttribute("message", "Connexion réussie !");
+			model.addAttribute("messageType", "success");
 			return "research";
 		}
 
 		// Si connexion KO -> renvoi à la page de connexion
+		model.addAttribute("message", "Email ou mot de passe incorrect...");
+		model.addAttribute("messageType", "error");
 		return "connexion";
 	}
 

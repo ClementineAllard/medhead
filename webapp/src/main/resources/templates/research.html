@@ -59,6 +59,11 @@
 	</header>
 	<!-- End Header Area -->
 
+    <!-- Start Alert -->
+		<div th:if="${message != null}" th:classappend="${messageType == 'error' ? 'alert alert-danger' : 'alert alert-success'}">
+            <span th:text="${message}"></span>
+        </div>
+    <!-- /End Alert -->
 
     <!-- Start Recherche -->
 	<section class="bloc">
