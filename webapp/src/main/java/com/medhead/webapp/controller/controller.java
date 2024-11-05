@@ -53,8 +53,6 @@ public class controller {
 		    model.addAttribute("groupes", listeGroupes);
 
 			// Envoi à la page de recherche d'hopitaux
-			model.addAttribute("message", "Connexion réussie !");
-			model.addAttribute("messageType", "success");
 			return "research";
 		}
 

@@ -60,9 +60,9 @@
 	<!-- End Header Area -->
 
     <!-- Start Alert -->
-		<div th:if="${message != null}" th:classappend="${messageType == 'error' ? 'alert alert-danger' : 'alert alert-success'}">
-            <span th:text="${message}"></span>
-        </div>
+	<div id="alerte" class="alert alert-danger" style="display: none;">
+        <span id="alerteMessage">ddd</span>
+    </div>
     <!-- /End Alert -->
 
     <!-- Start Recherche -->
@@ -150,44 +150,6 @@
     </footer>
     <!--/ End Footer Area -->
     
-    <script type="text/javascript" >
-
-        //Recherche des spécialités du groupe sélectionné, appelée lors d'un changement de sélection de groupe
-        function fChangementGroupe(idGroupe) {
-            // On remet à zéro la liste de spécialités
-            $('#specialitesListe').empty();
-            $('#specialiteCourante').empty();
-
-            // Si aucun groupe est sélectionné -> on rend inaccessible la sélection de spécialités et on quitte la fonction
-            if(idGroupe==0){
-                $("#specialitesSelect").prop("disabled", true);
-                return '';
-            } else { // Si un groupe est sélectionné -> on rend accessible la sélection de spécialités
-                $("#specialitesSelect").prop("disabled", false);
-            }
-           
-            // On recherche ensuite la liste des spécialités pour remplir le champ
-            $.ajax({
-                method: "GET",
-                contentType: "application/json",
-                url: "/specialites/"+idGroupe,
-                dataType: 'json',
-                success: function (data) {
-                    // On met un premier champ vide pour qu'il soit possible de ne pas choisir de spécialité
-                    $('#specialitesListe').append('<li value=0 class="option"></li>');
-
-                    // On ajoute toutes les spécialités dans le champ de sélection
-                    data.result.forEach(function(specialite) {
-                        $('#specialitesListe').append('<li value='+ specialite.id +' class="option" >' + specialite.libelle + '</li>');
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error('Erreur lors du chargement des spécialités :', error);
-                }
-            });
-        }
-
-    </script>
     <!-- jquery Min JS -->
     <script src="js/jquery.min.js"></script>
     <!-- jquery Migrate JS -->
@@ -228,6 +190,46 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- Main JS -->
     <script src="js/main.js"></script>
+
+    <script type="text/javascript" >
+        //Recherche des spécialités du groupe sélectionné, appelée lors d'un changement de sélection de groupe
+        function fChangementGroupe(idGroupe) {
+            // On remet à zéro la liste de spécialités et le champ d'alerte
+            $('#specialitesListe').empty();
+            $('#specialiteCourante').empty();
+            $('#alerte').hide();
+
+            // Si aucun groupe est sélectionné -> on rend inaccessible la sélection de spécialités et on quitte la fonction
+            if(idGroupe==0){
+                $("#specialitesSelect").prop("disabled", true);
+                return '';
+            } else { // Si un groupe est sélectionné -> on rend accessible la sélection de spécialités
+                $("#specialitesSelect").prop("disabled", false);
+            }
+           
+            // On recherche ensuite la liste des spécialités pour remplir le champ
+            $.ajax({
+                method: "GET",
+                contentType: "application/json",
+                url: "/specialites/"+idGroupe,
+                dataType: 'json',
+                success: function (data) {
+                    // On met un premier champ vide pour qu'il soit possible de ne pas choisir de spécialité
+                    $('#specialitesListe').append('<li value=0 class="option"></li>');
+
+                    // On ajoute toutes les spécialités dans le champ de sélection
+                    data.result.forEach(function(specialite) {
+                        $('#specialitesListe').append('<li value='+ specialite.id +' class="option" >' + specialite.libelle + '</li>');
+                    });
+                },
+                error: function () {
+                    $('#alerte').show();
+                    $('#alerteMessage')[0].innerText='Erreur lors du chargement des spécialités';
+                }
+            });
+        }
+
+    </script>
 
 
 
