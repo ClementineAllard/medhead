@@ -12,6 +12,7 @@ CREATE TABLE utilisateurs (
 );
  
 INSERT INTO utilisateurs (email, prenom, nom, mot_de_passe) VALUES
+  ('admin', '', '', 'admin'),
   ('laurentgina@mail.com', 'Laurent', 'GINA', 'laurent'),
   ('sophiefoncek@mail.com','Sophie', 'FONCEK',  'sophie'),
   ('agathefeeling@mail.com','Agathe', 'FEELING', 'agathe');
