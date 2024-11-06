@@ -21,5 +21,9 @@ public class HopitalService {
         return hopitalRepository.findById(id);
     }
 
+    public Hopital saveHopital(Hopital hopital) {
+		Hopital savedHopital = hopitalRepository.save(hopital);
+		return savedHopital;
+	}
 
 }
