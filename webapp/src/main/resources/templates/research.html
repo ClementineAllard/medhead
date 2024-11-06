@@ -65,9 +65,13 @@
 	<section class="bloc" style="background-color:#f2f5f7;">
 
         <!-- Start Alert -->
-	    <div id="alerte" class="alert alert-danger" style="display: none;">
+	    <div id="alerteDanger" class="alert alert-danger" style="display: none;">
             <i class="fa fa-exclamation-triangle"></i>
-            <span id="alerteMessage"></span>
+            <span id="alerteMessageDanger"></span>
+        </div>
+        <div id="alerteSuccess" class="alert alert-success" style="display: none;">
+            <i class="fa fa-check"></i>
+            <span id="alerteMessageSuccess"></span>
         </div>
         <!-- /End Alert -->
 
@@ -208,12 +212,35 @@
 
     <script type="text/javascript" >
 
+        // Affichage d'un message d'alerte
+        // type = 0 pour cacher les messages
+        // type = 1 pour afficher un message de danger
+        // type = 2 pour afficher un message de succès
+        function fAlerte(type=0, message =''){
+
+            switch(type){
+                case 0:
+                    $('#alerteSuccess').hide();
+                    $('#alerteDanger').hide();
+                    break;
+                case 1 : 
+                    $('#alerteSuccess').hide();
+                    $('#alerteMessageDanger').text(message);
+                    $('#alerteDanger').show();
+                    break;
+                case 2 : 
+                    $('#alerteDanger').hide();
+                    $('#alerteMessageSuccess').text(message);
+                    $('#alerteSuccess').show();
+                    break;  
+            };
+        }
         //Recherche des spécialités du groupe sélectionné, appelée lors d'un changement de sélection de groupe
         function fChangementGroupe(idGroupe) {
             // On remet à zéro la liste de spécialités et le champ d'alerte
             $('#specialitesListe').empty();
             $('#specialiteCourante').empty();
-            $('#alerte').hide();
+            fAlerte();
 
             // Si aucun groupe est sélectionné -> on rend inaccessible la sélection de spécialités et on quitte la fonction
             if(idGroupe==0){
@@ -238,8 +265,7 @@
                     });
                 },
                 error: function () {
-                    $('#alerteMessage').text('Erreur lors du chargement des spécialités');
-                    $('#alerte').show();
+                    fAlerte(1,'Erreur lors du chargement des spécialités');
                 }
             });
         }
@@ -248,7 +274,7 @@
         //Recherche des hopitaux correspondant à la demande
         function fRechercheHopital() {
             // On cache le champ d'alerte, le bloc d'hopital et le bloc aucun résultat
-            $('#alerte').hide();
+            fAlerte();
             $('#hopital').hide();
             $('#aucunResultat').hide();
 
@@ -257,15 +283,13 @@
 
             lieu = $('#lieu').val();
             if(lieu ==''){
-                $('#alerteMessage').text('Veuillez renseigner un lieu');
-                $('#alerte').show();
+                fAlerte(1,'Veuillez renseigner un lieu');
                 return;
             }
 
             idGroupe = $('#groupesListe .selected').val();
             if(idGroupe==undefined || idGroupe==0){
-                $('#alerteMessage').text('Veuillez sélectionner un groupe de spécialités');
-                $('#alerte').show();
+                fAlerte(1,'Veuillez sélectionner un groupe de spécialités');
                 return;
             }
 
@@ -296,8 +320,7 @@
                     
                 },
                 error: function () {
-                    $('#alerteMessage').text('Erreur lors de la recherche');
-                    $('#alerte').show();
+                    fAlerte(1,'Erreur lors de la recherche');
                 }
             });
                       
@@ -305,29 +328,26 @@
 
         //Réservation d'un lit
         function fReservationLit(){
-            $('#alerte').hide();
+            fAlerte();
             
             var idHopital = $('#hopitalId').val();
 
             // On recherche ensuite la liste des hôpitaux qui correspondent à la recherche
             $.ajax({
-                method: "GET",
+                method: "POST",
                 contentType: "application/json",
                 url: "/reservation/"+idHopital,
                 success: function (data) {
                     // Si la réservation a été effectuée
                     if(data.result != undefined ){
-                        $('#alerteMessage').text('Réservation effectuée avec succès : '+ data.result.nom);
-                        $('#alerte').show();
+                        fAlerte(2,'Réservation effectuée avec succès : '+ data.result.nom);
                     } else { // Sinon on renseigne qu'il y a eu une erreur
-                        $('#alerteMessage').text('Echec de la réservation');
-                        $('#alerte').show();
+                        fAlerte(1,'Echec de la réservation');
                     }
                     
                 },
                 error: function () {
-                    $('#alerteMessage').text('Erreur lors de la réservation');
-                    $('#alerte').show();
+                    fAlerte(1,'Erreur lors de la réservation');
                 }
             });
         }
