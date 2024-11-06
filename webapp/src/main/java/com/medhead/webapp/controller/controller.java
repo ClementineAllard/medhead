@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.medhead.webapp.model.Utilisateur;
+import com.medhead.webapp.model.AjaxResponseBodySpecialisation;
 import com.medhead.webapp.model.AjaxResponseBodySpecialite;
 import com.medhead.webapp.model.Specialite;
+import com.medhead.webapp.model.Specialisation;
 import com.medhead.webapp.service.SpecialiteService;
 import com.medhead.webapp.service.UtilisateurService;
+import com.medhead.webapp.service.SpecialisationService;
 
 @Controller
 public class controller {
@@ -22,6 +25,9 @@ public class controller {
 
 	@Autowired
 	private SpecialiteService specialiteService;
+
+	@Autowired
+	private SpecialisationService specialisationService;
 
 	/**
 	 * Ouverture de la page de connexion
@@ -62,8 +68,7 @@ public class controller {
 		return "connexion";
 	}
 
-	
-    /**
+	 /**
 	 * Récupération de la liste des specialités d'un groupe
 	 * @param parent code du groupe parent
 	 * @return - Liste des specialités du groupe
@@ -81,5 +86,26 @@ public class controller {
         return ResponseEntity.ok(result);
 
     }
+	
+    /**
+	 * Récupération des spécialisations à partir d'une spécialité
+	 * @param id Id de la spécialité
+	 * @return - Liste des spécialisations
+	 */
+	@GetMapping("/hopitaux/{id}")
+	public ResponseEntity<?> getHopitauxBySpecialite(@PathVariable("id") final Long id) {
+		// Création de la réponse AJAX
+		AjaxResponseBodySpecialisation result = new AjaxResponseBodySpecialisation();
+
+		// Récupération de la liste de spécialisations
+        Iterable<Specialisation> specialisations = specialisationService.getHopitauxBySpecialite(id);
+        result.setResult(specialisations);
+		result.setMsg("success");
+
+        return ResponseEntity.ok(result);
+
+    }
+
+
 
 }

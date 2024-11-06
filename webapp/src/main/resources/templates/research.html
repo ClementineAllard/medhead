@@ -118,23 +118,33 @@
 	<!--/ End Recherche -->
 
     <!-- Start Hopital -->
-		<section class="bloc" id="hopital" style="display:none; padding-top:50px;">
-			<div class="container">
-				<div class="row justify-content-md-center"> 
-					<div class="col-lg-6 col-6 inner">				
-						<div class="bloc-form">
-							<h2 id="hopitalNom"></h2>
-                            <ul class="list" style="margin-bottom: 20px;">
-                                <li><i class="fa fa-map-marker" style="margin-right: 5px; color: #1A76D1;"></i> <span id="hopitalAdresse"></span></li>
-                                <li><i class="fa fa-phone" style="margin-right: 5px; color: #1A76D1;"></i><span id="hopitalTelephone"></span></li>
-                            </ul>
-                            <button class="btn" type="submit" style="display: block; margin: 0 auto;">Réserver un lit</button>
-						</div>
+	<section class="bloc" id="hopital" style="display:none; padding-top:50px;">
+		<div class="container">
+			<div class="row justify-content-md-center"> 
+				<div class="col-lg-6 col-6 inner">				
+					<div class="bloc-form">
+						<h2 id="hopitalNom"></h2>
+                           <ul class="list" style="margin-bottom: 20px;">
+                               <li><i class="fa fa-map-marker" style="margin-right: 5px; color: #1A76D1;"></i> <span id="hopitalAdresse"></span></li>
+                               <li><i class="fa fa-phone" style="margin-right: 5px; color: #1A76D1;"></i><span id="hopitalTelephone"></span></li>
+                           </ul>
+                           <button class="btn" type="submit" style="display: block; margin: 0 auto;">Réserver un lit</button>
 					</div>
 				</div>
 			</div>
-		</section>
-		<!--/ End Hopital -->
+		</div>
+	</section>
+	<!--/ End Hopital -->
+
+    <!-- Start Aucun résultat -->
+	<section class="bloc" id="aucunResultat" style="display:none;padding-top:50px;">
+		<div class="container">
+			<div class="row justify-content-md-center">
+                <p>Aucun hôpital ne correspond à votre recherche</p>
+			</div>
+		</div>
+	</section>
+	<!--/ End Aucun résultat -->
 	
     <!-- Footer Area -->
     <footer id="footer" class="footer">
@@ -237,11 +247,12 @@
         
         //Recherche des hopitaux correspondant à la demande
         function fRechercheHopital() {
-            // On remet à zéro le champ d'alerte et le bloc d'hopital
+            // On cache le champ d'alerte, le bloc d'hopital et le bloc aucun résultat
             $('#alerte').hide();
             $('#hopital').hide();
+            $('#aucunResultat').hide();
 
-            // Vérification que les champs ont été remplis
+            // On vérifie que les champs obligatoires sont renseignés
             var lieu, groupe, specialite;
 
             lieu = $('#lieu').val();
@@ -258,31 +269,37 @@
                 return;
             }
 
+            // Si aucune spécialité n'est sélectionnée on prend le groupe
             idSpecialite = $('#specialitesListe .selected').val();
             if(idSpecialite==undefined || idSpecialite==0){
                 idSpecialite = idGroupe
             }
 
-            $('#hopitalNom').text('Hôpital Saint-Bidule');
-            $('#hopitalAdresse').text('77 rue Bidule, 54000 Nancy');
-            $('#hopitalTelephone').text('07 52 89 32 22');
-            $('#hopital').show();
-
             // On recherche ensuite la liste des hôpitaux qui correspondent à la recherche
-            /**$.ajax({
+            $.ajax({
                 method: "GET",
                 contentType: "application/json",
-                url: "/specialisation/"+idSpecialite,
+                url: "/hopitaux/"+idSpecialite,
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data);
+                    // Si des hôpitaux ont été trouvés on affiche l'hôpital
+                    if(data.result.length > 0){
+                        var hopital = data.result[0].hopital;
+
+                        $('#hopitalNom').text(hopital.nom);
+                        $('#hopitalAdresse').text(hopital.adresse + ', ' + hopital.cp + ' ' + hopital.ville);
+                        $('#hopitalTelephone').text(hopital.telephone);
+                        $('#hopital').show();
+                    } else { // Sinon on renseigne qu'il n'y a pas de résultat
+                        $('#aucunResultat').show();
+                    }
+                    
                 },
                 error: function () {
                     $('#alerte').text('Erreur lors de la recherche');
                     $('#alerte').show();
                 }
             });
-            */
                       
         }
 
