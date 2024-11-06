@@ -5,17 +5,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.medhead.webapp.model.Utilisateur;
 import com.medhead.webapp.model.AjaxResponseBodySpecialisation;
 import com.medhead.webapp.model.AjaxResponseBodySpecialite;
+import com.medhead.webapp.model.AjaxResponseBodyHopital;
 import com.medhead.webapp.model.Specialite;
 import com.medhead.webapp.model.Specialisation;
+import com.medhead.webapp.model.Hopital;
 import com.medhead.webapp.service.SpecialiteService;
 import com.medhead.webapp.service.UtilisateurService;
 import com.medhead.webapp.service.SpecialisationService;
+import com.medhead.webapp.service.HopitalService;
 
 @Controller
 public class controller {
@@ -28,6 +32,9 @@ public class controller {
 
 	@Autowired
 	private SpecialisationService specialisationService;
+
+	@Autowired
+	private HopitalService hopitalService;
 
 	/**
 	 * Ouverture de la page de connexion
@@ -100,6 +107,25 @@ public class controller {
 		// Récupération de la liste de spécialisations
         Iterable<Specialisation> specialisations = specialisationService.getHopitauxBySpecialite(id);
         result.setResult(specialisations);
+		result.setMsg("success");
+
+        return ResponseEntity.ok(result);
+
+    }
+
+	/**
+	 * Réservation d'un lit d'hôpital
+     * @param id - Id de l'hôpital à modifier
+	 * @return hopital modifié
+	 */
+	@PostMapping("/reservation/{id}")
+	public ResponseEntity<?> postReservationLit(@PathVariable("id") final Long id) {
+		// Création de la réponse AJAX
+		AjaxResponseBodyHopital result = new AjaxResponseBodyHopital();
+
+		// Récupération de la liste de spécialisations
+        Hopital hopital = hopitalService.postReservationLit(id);
+        result.setResult(hopital);
 		result.setMsg("success");
 
         return ResponseEntity.ok(result);

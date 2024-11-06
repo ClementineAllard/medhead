@@ -26,11 +26,11 @@ public class SpecialisationProxy {
 	public Iterable<Specialisation> getHopitauxBySpecialite(final Long id) {
 		// Appel à l'API
 		String baseApiUrl = props.getApiUrl();
-		String getGroupesUrl = baseApiUrl + "/hopitaux/" + id;
+		String getHopitauxUrl = baseApiUrl + "/hopitaux/" + id;
 
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Iterable<Specialisation>> response = restTemplate.exchange(
-                getGroupesUrl, 
+				getHopitauxUrl, 
 				HttpMethod.GET, 
 				null,
 				new ParameterizedTypeReference<Iterable<Specialisation>>() {}

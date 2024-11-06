@@ -124,11 +124,12 @@
 				<div class="col-lg-6 col-6 inner">				
 					<div class="bloc-form">
 						<h2 id="hopitalNom"></h2>
-                           <ul class="list" style="margin-bottom: 20px;">
-                               <li><i class="fa fa-map-marker" style="margin-right: 5px; color: #1A76D1;"></i> <span id="hopitalAdresse"></span></li>
-                               <li><i class="fa fa-phone" style="margin-right: 5px; color: #1A76D1;"></i><span id="hopitalTelephone"></span></li>
-                           </ul>
-                           <button class="btn" type="submit" style="display: block; margin: 0 auto;">Réserver un lit</button>
+                        <ul class="list" style="margin-bottom: 20px;">
+                            <li><i class="fa fa-map-marker" style="margin-right: 5px; color: #1A76D1;"></i> <span id="hopitalAdresse"></span></li>
+                            <li><i class="fa fa-phone" style="margin-right: 5px; color: #1A76D1;"></i><span id="hopitalTelephone"></span></li>
+                        </ul>
+                        <button class="btn" type="submit" style="display: block; margin: 0 auto;" onclick="fReservationLit();">Réserver un lit</button>
+                        <span style="display:none;" id="hopitalId" value="0"></span>
 					</div>
 				</div>
 			</div>
@@ -227,7 +228,6 @@
                 method: "GET",
                 contentType: "application/json",
                 url: "/specialites/"+idGroupe,
-                dataType: 'json',
                 success: function (data) {
                     // On met un premier champ vide pour qu'il soit possible de ne pas choisir de spécialité
                     $('#specialitesListe').append('<li value=0 class="option"></li>');
@@ -280,7 +280,6 @@
                 method: "GET",
                 contentType: "application/json",
                 url: "/hopitaux/"+idSpecialite,
-                dataType: 'json',
                 success: function (data) {
                     // Si des hôpitaux ont été trouvés on affiche l'hôpital
                     if(data.result.length > 0){
@@ -289,6 +288,7 @@
                         $('#hopitalNom').text(hopital.nom);
                         $('#hopitalAdresse').text(hopital.adresse + ', ' + hopital.cp + ' ' + hopital.ville);
                         $('#hopitalTelephone').text(hopital.telephone);
+                        $('#hopitalId').val(hopital.id);
                         $('#hopital').show();
                     } else { // Sinon on renseigne qu'il n'y a pas de résultat
                         $('#aucunResultat').show();
@@ -296,11 +296,40 @@
                     
                 },
                 error: function () {
-                    $('#alerte').text('Erreur lors de la recherche');
+                    $('#alerteMessage').text('Erreur lors de la recherche');
                     $('#alerte').show();
                 }
             });
                       
+        }
+
+        //Réservation d'un lit
+        function fReservationLit(){
+            $('#alerte').hide();
+            
+            var idHopital = $('#hopitalId').val();
+
+            // On recherche ensuite la liste des hôpitaux qui correspondent à la recherche
+            $.ajax({
+                method: "GET",
+                contentType: "application/json",
+                url: "/reservation/"+idHopital,
+                success: function (data) {
+                    // Si la réservation a été effectuée
+                    if(data.result != undefined ){
+                        $('#alerteMessage').text('Réservation effectuée avec succès : '+ data.result.nom);
+                        $('#alerte').show();
+                    } else { // Sinon on renseigne qu'il y a eu une erreur
+                        $('#alerteMessage').text('Echec de la réservation');
+                        $('#alerte').show();
+                    }
+                    
+                },
+                error: function () {
+                    $('#alerteMessage').text('Erreur lors de la réservation');
+                    $('#alerte').show();
+                }
+            });
         }
 
     </script>

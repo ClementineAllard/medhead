@@ -51,11 +51,11 @@ public class SpecialiteProxy {
 	public Iterable<Specialite> getSpecialites(Long parent) {
 		// Appel à l'API
 		String baseApiUrl = props.getApiUrl();
-		String getGroupesUrl = baseApiUrl + "/specialites/" + parent;
+		String getSpecialitesUrl = baseApiUrl + "/specialites/" + parent;
 
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Iterable<Specialite>> response = restTemplate.exchange(
-                getGroupesUrl, 
+				getSpecialitesUrl, 
 				HttpMethod.GET, 
 				null,
 				new ParameterizedTypeReference<Iterable<Specialite>>() {}

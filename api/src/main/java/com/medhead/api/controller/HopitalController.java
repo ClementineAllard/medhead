@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,8 +36,8 @@ public class HopitalController {
 	 * Update - Réservation d'un lit d'hôpital
 	 * @param id - Id de l'hôpital
 	 */
-	@PutMapping("/reservation/{id}")
-	public Hopital putReservationLit(@PathVariable("id") final Long id) {
+	@PostMapping("/reservation/{id}")
+	public Hopital postReservationLit(@PathVariable("id") final Long id) {
         Optional<Hopital> hopital = hopitalService.getHopital(id);
 		if(hopital.isPresent()) {
 			Hopital hopitalAReserver = hopital.get();

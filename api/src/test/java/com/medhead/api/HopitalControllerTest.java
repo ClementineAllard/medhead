@@ -2,7 +2,7 @@ package com.medhead.api;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -29,7 +29,7 @@ public class HopitalControllerTest {
 
     @Test
     public void testReservationLit() throws Exception {
-        mockMvc.perform(put("/reservation/1"))
+        mockMvc.perform(post("/reservation/1"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.nbLit", is(0)));
     }
