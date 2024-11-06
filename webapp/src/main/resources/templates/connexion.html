@@ -16,6 +16,8 @@
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<!-- Font Awesome CSS -->
+		<link rel="stylesheet" href="css/font-awesome.min.css">
 
 		<!-- Medipro CSS -->
 		<link rel="stylesheet" href="css/normalize.css">
@@ -44,6 +46,7 @@
 
 		<!-- Start Alert -->
 		<div th:if="${message != null}" th:classappend="${messageType == 'error' ? 'alert alert-danger' : 'alert alert-success'}">
+			<i class="fa fa-exclamation-triangle"></i>
 	   		<span th:text="${message}"></span>
    		</div>
 		<!-- /End Alert -->

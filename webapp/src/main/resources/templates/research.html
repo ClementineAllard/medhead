@@ -59,31 +59,35 @@
 	</header>
 	<!-- End Header Area -->
 
-    <!-- Start Alert -->
-	<div id="alerte" class="alert alert-danger" style="display: none;">
-        <span id="alerteMessage">ddd</span>
-    </div>
-    <!-- /End Alert -->
+    
 
     <!-- Start Recherche -->
-	<section class="bloc">
+	<section class="bloc" style="background-color:#f2f5f7;">
+
+        <!-- Start Alert -->
+	    <div id="alerte" class="alert alert-danger" style="display: none;">
+            <i class="fa fa-exclamation-triangle"></i>
+            <span id="alerteMessage"></span>
+        </div>
+        <!-- /End Alert -->
+
 		<div class="container">
 				<div class="row justify-content-md-center"> 
 					<div class="col-lg-10">
 						<div class="bloc-form">
 							<h2>Recherche</h2>
 							<!-- Form -->
-							<form class="form">
+							<div class="form" >
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="form-group">
-											<input type="text" name="ville" placeholder="Ville" tabindex="1" required="">
+											<input type="text" id="lieu" name="lieu" placeholder="Où ?" tabindex="1" required="">
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
                                                <div class="nice-select form-control wide" tabindex="2" required=""><span class="current">Groupe</span>
-                                                   <ul class="list">
+                                                   <ul class="list" id="groupesListe">
                                                         <li  th:value=0 class="option" onclick="fChangementGroupe(this.value);"></li>
                                                         <li  th:each="groupe: ${groupes}" th:value="${groupe.id}" th:text="${groupe.libelle}" class="option" onclick="fChangementGroupe(this.value);"></li>
                                                    </ul>
@@ -100,11 +104,11 @@
 									</div>
 									<div class="col-6" style="display: block; margin: 0 auto;" >
 										<div class="form-group login-btn">
-											<button class="btn" type="submit" >Rechercher</button>
+											<button class="btn" onclick="fRechercheHopital();" >Rechercher</button>
 										</div>
 									</div>
 								</div>
-							</form>
+							</div>
 							<!--/ End Form -->
 					    </div>
 				    </div>
@@ -114,15 +118,15 @@
 	<!--/ End Recherche -->
 
     <!-- Start Hopital -->
-		<section class="bloc" >
+		<section class="bloc" id="hopital" style="display:none; padding-top:50px;">
 			<div class="container">
 				<div class="row justify-content-md-center"> 
 					<div class="col-lg-6 col-6 inner">				
 						<div class="bloc-form">
-							<h2>Hopital Fred Brooks</h2>
+							<h2 id="hopitalNom"></h2>
                             <ul class="list" style="margin-bottom: 20px;">
-                                <li><i class="fa fa-map-marker" style="margin-right: 5px; color: #1A76D1;"></i>25 rue du Four, 54 000 Nancy</li>
-                                <li><i class="fa fa-phone" style="margin-right: 5px; color: #1A76D1;"></i>03 83 53 65 85</li>
+                                <li><i class="fa fa-map-marker" style="margin-right: 5px; color: #1A76D1;"></i> <span id="hopitalAdresse"></span></li>
+                                <li><i class="fa fa-phone" style="margin-right: 5px; color: #1A76D1;"></i><span id="hopitalTelephone"></span></li>
                             </ul>
                             <button class="btn" type="submit" style="display: block; margin: 0 auto;">Réserver un lit</button>
 						</div>
@@ -192,6 +196,7 @@
     <script src="js/main.js"></script>
 
     <script type="text/javascript" >
+
         //Recherche des spécialités du groupe sélectionné, appelée lors d'un changement de sélection de groupe
         function fChangementGroupe(idGroupe) {
             // On remet à zéro la liste de spécialités et le champ d'alerte
@@ -223,10 +228,62 @@
                     });
                 },
                 error: function () {
+                    $('#alerteMessage').text('Erreur lors du chargement des spécialités');
                     $('#alerte').show();
-                    $('#alerteMessage')[0].innerText='Erreur lors du chargement des spécialités';
                 }
             });
+        }
+
+        
+        //Recherche des hopitaux correspondant à la demande
+        function fRechercheHopital() {
+            // On remet à zéro le champ d'alerte et le bloc d'hopital
+            $('#alerte').hide();
+            $('#hopital').hide();
+
+            // Vérification que les champs ont été remplis
+            var lieu, groupe, specialite;
+
+            lieu = $('#lieu').val();
+            if(lieu ==''){
+                $('#alerteMessage').text('Veuillez renseigner un lieu');
+                $('#alerte').show();
+                return;
+            }
+
+            idGroupe = $('#groupesListe .selected').val();
+            if(idGroupe==undefined || idGroupe==0){
+                $('#alerteMessage').text('Veuillez sélectionner un groupe de spécialités');
+                $('#alerte').show();
+                return;
+            }
+
+            idSpecialite = $('#specialitesListe .selected').val();
+            if(idSpecialite==undefined || idSpecialite==0){
+                idSpecialite = idGroupe
+            }
+
+            $('#hopitalNom').text('Hôpital Saint-Bidule');
+            $('#hopitalAdresse').text('77 rue Bidule, 54000 Nancy');
+            $('#hopitalTelephone').text('07 52 89 32 22');
+            $('#hopital').show();
+
+            // On recherche ensuite la liste des hôpitaux qui correspondent à la recherche
+            /**$.ajax({
+                method: "GET",
+                contentType: "application/json",
+                url: "/specialisation/"+idSpecialite,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function () {
+                    $('#alerte').text('Erreur lors de la recherche');
+                    $('#alerte').show();
+                }
+            });
+            */
+                      
         }
 
     </script>
