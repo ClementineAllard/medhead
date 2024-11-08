@@ -303,11 +303,11 @@
             $.ajax({
                 method: "GET",
                 contentType: "application/json",
-                url: "/hopitaux/"+idSpecialite,
+                url: "/hopital/"+idSpecialite+"/"+lieu,
                 success: function (data) {
                     // Si des hôpitaux ont été trouvés on affiche l'hôpital
-                    if(data.result.length > 0){
-                        var hopital = data.result[0].hopital;
+                    if(data.result != null){
+                        var hopital = data.result;
 
                         $('#hopitalNom').text(hopital.nom);
                         $('#hopitalAdresse').text(hopital.adresse + ', ' + hopital.cp + ' ' + hopital.ville);

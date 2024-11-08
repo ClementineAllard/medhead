@@ -11,5 +11,9 @@ import lombok.Data;
 public class CustomProperties {
 
     private String apiUrl;
+
+    private String apiGoogleMapsUrl;
+
+    private String keyGoogleMaps;
     
 }

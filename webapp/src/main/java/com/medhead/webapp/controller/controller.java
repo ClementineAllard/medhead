@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.medhead.webapp.model.Utilisateur;
-import com.medhead.webapp.model.AjaxResponseBodySpecialisation;
 import com.medhead.webapp.model.AjaxResponseBodySpecialite;
 import com.medhead.webapp.model.AjaxResponseBodyHopital;
 import com.medhead.webapp.model.Specialite;
-import com.medhead.webapp.model.Specialisation;
 import com.medhead.webapp.model.Hopital;
 import com.medhead.webapp.service.SpecialiteService;
 import com.medhead.webapp.service.UtilisateurService;
@@ -99,14 +97,14 @@ public class controller {
 	 * @param id Id de la spécialité
 	 * @return - Liste des spécialisations
 	 */
-	@GetMapping("/hopitaux/{id}")
-	public ResponseEntity<?> getHopitauxBySpecialite(@PathVariable("id") final Long id) {
+	@GetMapping("/hopital/{id}/{adresse}")
+	public ResponseEntity<?> getHopitauxBySpecialite(@PathVariable("id") final Long id, @PathVariable("adresse") String adresse) {
 		// Création de la réponse AJAX
-		AjaxResponseBodySpecialisation result = new AjaxResponseBodySpecialisation();
+		AjaxResponseBodyHopital result = new AjaxResponseBodyHopital();
 
 		// Récupération de la liste de spécialisations
-        Iterable<Specialisation> specialisations = specialisationService.getHopitauxBySpecialite(id);
-        result.setResult(specialisations);
+        Hopital hopital = specialisationService.getHopitalBySpecialiteAndDistance(id,adresse);
+        result.setResult(hopital);
 		result.setMsg("success");
 
         return ResponseEntity.ok(result);

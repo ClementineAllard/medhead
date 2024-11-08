@@ -15,6 +15,8 @@ public class Hopital {
 
     private String cp;
 
+    private String pays;
+
     private String telephone;
 
     private Integer nbLit;

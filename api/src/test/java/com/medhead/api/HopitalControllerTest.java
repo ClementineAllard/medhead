@@ -24,7 +24,8 @@ public class HopitalControllerTest {
     public void testGetHopitaux() throws Exception {
         mockMvc.perform(get("/hopital/1"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.nom", is("Hôpital Saint-Jean")));
+            .andExpect(jsonPath("$.nom", is("Hôpital Saint-Jean")))
+            .andExpect(jsonPath("$.pays", is("FR")));
     }
 
     @Test

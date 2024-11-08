@@ -136,31 +136,32 @@ CREATE TABLE hopitaux (
   adresse VARCHAR(250) NOT NULL,
   ville VARCHAR(250) NOT NULL,
   code_postal VARCHAR(5) NOT NULL,
+  code_pays VARCHAR(2) NOT NULL,
   telephone VARCHAR(14) NOT NULL,
   nb_lit INT NOT NULL
 );
 
-INSERT INTO hopitaux (nom, adresse, ville, code_postal, telephone, nb_lit) VALUES
-('Hôpital Saint-Jean', '12 Rue des Lilas', 'Paris', '75015', '01 40 23 45 67', 0),
-('Centre Hospitalier Universitaire Dupont', '85 Avenue des Champs Élysées', 'Lyon', '69006', '04 78 24 56 78', 300),
-('Clinique de la Paix', '45 Rue de la Paix', 'Marseille', '13001', '04 91 53 21 45', 80),
-('Hôpital Général de Bordeaux', '10 Rue Sainte-Catherine', 'Bordeaux', '33000', '05 56 90 33 44', 250),
-('Centre Médical de Lille', '22 Boulevard de Strasbourg', 'Lille', '59000', '03 20 60 77 88', 200),
-('Hôpital Saint-Vincent', '9 Rue de la République', 'Toulouse', '31000', '05 34 45 67 89', 180),
-('Clinique des Cèdres', '18 Allée des Acacias', 'Nice', '06000', '04 93 56 78 90', 150),
-('Hôpital de l\'Océan', '53 Avenue de la Plage', 'Biarritz', '64200', '05 59 22 33 44', 100),
-('Hôpital Universitaire de Strasbourg', '32 Rue de la Liberté', 'Strasbourg', '67000', '03 88 45 67 89', 350),
-('Clinique du Soleil', '21 Rue du Soleil Levant', 'Montpellier', '34000', '04 67 56 78 90', 90),
-('Centre de Soins d\'Orléans', '77 Rue Royale', 'Orléans', '45000', '02 38 56 78 90', 110),
-('Hôpital Sainte-Marie', '15 Rue du Château', 'Rennes', '35000', '02 99 23 45 67', 200),
-('Centre Hospitalier de Nantes', '29 Quai de la Fosse', 'Nantes', '44000', '02 40 50 60 70', 280),
-('Hôpital de la Côte d\'Azur', '88 Avenue des Palmiers', 'Cannes', '06400', '04 93 99 11 22', 130),
-('Hôpital Saint-Pierre', '5 Rue de la Fontaine', 'Metz', '57000', '03 87 23 45 67', 160),
-('Clinique du Lac', '41 Boulevard du Lac', 'Annecy', '74000', '04 50 23 45 67', 70),
-('Hôpital Mont-Blanc', '62 Avenue de la Montagne', 'Chamonix', '74400', '04 50 22 33 44', 60),
-('Hôpital Universitaire de Grenoble', '8 Rue des Alpes', 'Grenoble', '38000', '04 76 23 45 67', 320),
-('Centre Médical du Havre', '90 Rue de Normandie', 'Le Havre', '76600', '02 35 22 33 44', 140),
-('Hôpital Saint-Luc', '16 Rue des Églises', 'Tours', '37000', '02 47 23 45 67', 190);
+INSERT INTO hopitaux (nom, adresse, ville, code_postal, code_pays, telephone, nb_lit) VALUES
+('Hôpital Saint-Jean', '12 Rue des Lilas', 'Paris', '75015', 'FR', '01 40 23 45 67', 0),
+('Centre Hospitalier Universitaire Dupont', '85 Avenue des Champs Élysées', 'Lyon', '69006', 'FR', '04 78 24 56 78', 300),
+('Clinique de la Paix', '45 Rue de la Paix', 'Marseille', '13001', 'FR', '04 91 53 21 45', 80),
+('Hôpital Général de Bordeaux', '10 Rue Sainte-Catherine', 'Bordeaux', '33000', 'FR', '05 56 90 33 44', 250),
+('Centre Médical de Lille', '22 Boulevard de Strasbourg', 'Lille', '59000', 'FR', '03 20 60 77 88', 200),
+('Hôpital Saint-Vincent', '9 Rue de la République', 'Toulouse', '31000', 'FR', '05 34 45 67 89', 180),
+('Clinique des Cèdres', '18 Allée des Acacias', 'Nice', '06000', 'FR', '04 93 56 78 90', 150),
+('Hôpital de l\'Océan', '53 Avenue de la Plage', 'Biarritz', '64200', 'FR', '05 59 22 33 44', 100),
+('Hôpital Universitaire de Strasbourg', '32 Rue de la Liberté', 'Strasbourg', '67000', 'FR', '03 88 45 67 89', 350),
+('Clinique du Soleil', '21 Rue du Soleil Levant', 'Montpellier', '34000', 'FR', '04 67 56 78 90', 90),
+('Centre de Soins d\'Orléans', '77 Rue Royale', 'Orléans', '45000', 'FR', '02 38 56 78 90', 110),
+('Hôpital Sainte-Marie', '15 Rue du Château', 'Rennes', '35000', 'FR', '02 99 23 45 67', 200),
+('Centre Hospitalier de Nantes', '29 Quai de la Fosse', 'Nantes', '44000', 'FR', '02 40 50 60 70', 280),
+('Hôpital de la Côte d\'Azur', '88 Avenue des Palmiers', 'Cannes', '06400', 'FR', '04 93 99 11 22', 130),
+('Hôpital Saint-Pierre', '5 Rue de la Fontaine', 'Metz', '57000', 'FR', '03 87 23 45 67', 160),
+('Clinique du Lac', '41 Boulevard du Lac', 'Annecy', '74000', 'FR', '04 50 23 45 67', 70),
+('Hôpital Mont-Blanc', '62 Avenue de la Montagne', 'Chamonix', '74400', 'FR', '04 50 22 33 44', 60),
+('Hôpital Universitaire de Grenoble', '8 Rue des Alpes', 'Grenoble', '38000', 'FR', '04 76 23 45 67', 320),
+('Centre Médical du Havre', '90 Rue de Normandie', 'Le Havre', '76600', 'FR', '02 35 22 33 44', 140),
+('Hôpital Saint-Luc', '16 Rue des Églises', 'Tours', '37000', 'FR', '02 47 23 45 67', 190);
 
 
 CREATE TABLE specialisations (

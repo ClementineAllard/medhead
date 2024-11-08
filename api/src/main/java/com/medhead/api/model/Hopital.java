@@ -27,6 +27,9 @@ public class Hopital {
     @Column(name="code_postal")
     private String cp;
 
+    @Column(name="code_pays")
+    private String pays;
+
     private String telephone;
     
     @Column(name="nb_lit")
