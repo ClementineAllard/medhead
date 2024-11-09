@@ -20,11 +20,12 @@ public class UtilisateurController {
     * Read - Vérifier que l'utilisateur peut se connecter
     * @param email email de l'utilisateur
     * @param mdp mdp saisi par l'utilisateur
+    * @param cle clé de cryptage pour le mot de passe
     * @return - vrai si le mdp est correct
     */
-    @GetMapping("/utilisateur/{email}/{mdp}")
-    public boolean getUtilisateurByEmail(@PathVariable("email") String email, @PathVariable("mdp") String mdp) {
-        return utilisateurService.getUtilisateurByEmailAndMdp(email, mdp);
+    @GetMapping("/utilisateur/{email}/{mdp}/{cle}")
+    public boolean getUtilisateurByEmail(@PathVariable("email") String email, @PathVariable("mdp") String mdp, @PathVariable("cle") String cle) {
+        return utilisateurService.getUtilisateurByEmailAndMdp(email, mdp, cle);
     }
 
     /**

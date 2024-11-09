@@ -19,38 +19,40 @@ public class UtilisateurControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private String cleCryptage = "MEDHEAD_API_TEST";
+
     @Test
     public void testGetUtilisateur() throws Exception {
         mockMvc.perform(get("/utilisateur/1"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.email", is("laurentgina@mail.com")));
+            .andExpect(jsonPath("$.email", is("admin")));
     }
 
     @Test
     public void testGetUtilisateurs() throws Exception {
         mockMvc.perform(get("/utilisateurs"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].email", is("laurentgina@mail.com")));
+            .andExpect(jsonPath("$[0].email", is("admin")));
     }
 
     
     @Test
     public void testConnexionByEmailAndMdp() throws Exception {
-        mockMvc.perform(get("/utilisateur/laurentgina@mail.com/laurent"))
+        mockMvc.perform(get("/utilisateur/laurentgina@mail.com/laurent/"+cleCryptage))
             .andExpect(status().isOk())
             .andExpect(content().string("true"));
     }
 
     @Test
     public void testConnexionMdpIncorrect() throws Exception {
-        mockMvc.perform(get("/utilisateur/laurentgina@mail.com/incorrect"))
+        mockMvc.perform(get("/utilisateur/laurentgina@mail.com/incorrect/"+cleCryptage))
             .andExpect(status().isOk())
             .andExpect(content().string("false"));
     }
 
     @Test
     public void testConnexionEmailInexistant() throws Exception {
-        mockMvc.perform(get("/utilisateur/laurentginaa@mail.com/laurent"))
+        mockMvc.perform(get("/utilisateur/laurentginaa@mail.com/laurent/"+cleCryptage))
             .andExpect(status().isOk())
             .andExpect(content().string("false"));
     }
