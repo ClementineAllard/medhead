@@ -28,7 +28,7 @@ public class UtilisateurProxy {
 	public boolean connecteUtilisateurByEmailMdp(String email, String mdp) {
 		// Appel à l'API
 		String baseApiUrl = props.getApiUrl();
-		String connecteUtilisateurUrl = baseApiUrl + "/utilisateur/" + email + "/" + mdp;
+		String connecteUtilisateurUrl = baseApiUrl + "/utilisateur/connexion/" + email + "/" + mdp + "/" + props.getCleCryptagePass();
 
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Boolean> response = restTemplate.exchange(

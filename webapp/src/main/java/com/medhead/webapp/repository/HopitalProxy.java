@@ -27,12 +27,12 @@ public class HopitalProxy {
 	public Hopital postReservationLit(final Long id) {
 		// Appel à l'API
 		String baseApiUrl = props.getApiUrl();
-		String postReservationUrl = baseApiUrl + "/reservation/" + id;
+		String putReservationUrl = baseApiUrl + "/hopital/reservation/" + id;
 
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Hopital> response = restTemplate.exchange(
-                postReservationUrl, 
-				HttpMethod.POST, 
+                putReservationUrl, 
+				HttpMethod.PUT, 
 				null,
 				Hopital.class
 			);

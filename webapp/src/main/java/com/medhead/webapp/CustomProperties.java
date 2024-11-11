@@ -15,5 +15,7 @@ public class CustomProperties {
     private String apiGoogleMapsUrl;
 
     private String keyGoogleMaps;
+
+    private String cleCryptagePass;
     
 }

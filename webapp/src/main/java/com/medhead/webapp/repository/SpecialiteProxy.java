@@ -28,7 +28,7 @@ public class SpecialiteProxy {
 	public Iterable<Specialite> getGroupes() {
 		// Appel à l'API
 		String baseApiUrl = props.getApiUrl();
-		String getGroupesUrl = baseApiUrl + "/groupes";
+		String getGroupesUrl = baseApiUrl + "/specialite/groupes";
 
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Iterable<Specialite>> response = restTemplate.exchange(

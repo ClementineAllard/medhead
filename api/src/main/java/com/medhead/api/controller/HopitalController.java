@@ -119,7 +119,7 @@ public class HopitalController {
 	 * @param id - id de l'hôpital
 	 * @return l'hôpital modifié
 	 */
-	@PutMapping("hopital/reservation/{id}")
+	@PutMapping("/hopital/reservation/{id}")
 	public Hopital updateReservationLit(@PathVariable("id") final Long id) {
         Optional<Hopital> hopital = hopitalService.getHopital(id);
 		if(hopital.isPresent()) {
