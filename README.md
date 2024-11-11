@@ -7,6 +7,13 @@ Système d'intervention d'urgence
 - VS Code avec extension Spring Boot Extension Pack
 - MySQL
 
+## Installation
+Cloner avec GitHub Desktop
+
+ou
+
+git clone https://github.com/ClementineAllard/medhead.git
+
 ## Commande lancement
 ./mvnw spring-boot:run
 
