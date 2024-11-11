@@ -123,7 +123,7 @@ public class UtilisateurControllerTest {
     @Test
     @Order(5)
     public void testConnexionOK() throws Exception {
-        mockMvc.perform(get("/connexion/" + utilisateur.getEmail() + "/" + utilisateur.getMdp() +"/"+ cleCryptage))
+        mockMvc.perform(get("/utilisateur/connexion/" + utilisateur.getEmail() + "/" + utilisateur.getMdp() +"/"+ cleCryptage))
             .andExpect(status().isOk())
             .andExpect(content().string("true"));
     }
@@ -131,7 +131,7 @@ public class UtilisateurControllerTest {
     @Test
     @Order(6)
     public void testConnexionMdpIncorrect() throws Exception {
-        mockMvc.perform(get("/connexion/" + utilisateur.getEmail() + "/" + utilisateur.getMdp() +"incorrect/"+cleCryptage))
+        mockMvc.perform(get("/utilisateur/connexion/" + utilisateur.getEmail() + "/" + utilisateur.getMdp() +"incorrect/"+cleCryptage))
             .andExpect(status().isOk())
             .andExpect(content().string("false"));
     }
@@ -139,7 +139,7 @@ public class UtilisateurControllerTest {
     @Test
     @Order(7)
     public void testConnexionMauvaiseCle() throws Exception {
-        mockMvc.perform(get("/connexion/" + utilisateur.getEmail() + "/" + utilisateur.getMdp() +"/MAUVAIS_CLE"))
+        mockMvc.perform(get("/utilisateur/connexion/" + utilisateur.getEmail() + "/" + utilisateur.getMdp() +"/MAUVAIS_CLE"))
             .andExpect(status().isOk())
             .andExpect(content().string("false"));
     }

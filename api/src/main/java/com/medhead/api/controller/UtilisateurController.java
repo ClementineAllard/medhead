@@ -114,7 +114,7 @@ public class UtilisateurController {
     * @param cle - clé de cryptage pour le mot de passe
     * @return vrai si le mdp est correct
     */
-    @GetMapping("/connexion/{email}/{mdp}/{cle}")
+    @GetMapping("/utilisateur/connexion/{email}/{mdp}/{cle}")
     public boolean verifConnexion(@PathVariable("email") String email, @PathVariable("mdp") String mdp, @PathVariable("cle") String cle) {
         return utilisateurService.verifConnexion(email, mdp, cle);
     }
