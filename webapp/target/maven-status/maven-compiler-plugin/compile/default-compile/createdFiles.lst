@@ -1,0 +1,5 @@
+com\medhead\webapp\model\Hopital.class
+com\medhead\webapp\CustomProperties.class
+com\medhead\webapp\WebappApplication.class
+com\medhead\webapp\model\AjaxResponseBodyHopital.class
+com\medhead\webapp\service\UtilisateurService.class
