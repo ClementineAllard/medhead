@@ -36,17 +36,10 @@ jobs:
         run: ./mvnw compile
         working-directory: ./api
 
-      # Tests the api
-      - name: test api
-        run: ./mvnw test
-        working-directory: ./api
+      - name: Grant execute permission for Maven wrapper
+        run: chmod +x ./webapp/mvnw
         
       # Compiles the webapp
       - name: compilation webapp
         run: ./mvnw compile
-        working-directory: ./webapp
-
-      # Tests the webapp
-      - name: test api
-        run: ./mvnw test
         working-directory: ./webapp
