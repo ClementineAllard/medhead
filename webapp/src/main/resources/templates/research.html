@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title -->
+<title>MedHead - Plateforme de réservation de lits d'hopitaux.</title>
+		
+<!-- Favicon -->
+<link rel="icon" src="img/favicon.png">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- Nice Select CSS -->
+<link rel="stylesheet" href="css/nice-select.css">
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<!-- icofont CSS -->
+<link rel="stylesheet" href="css/icofont.css">
+<!-- Slicknav -->
+<link rel="stylesheet" href="css/slicknav.min.css">
+<!-- Owl Carousel CSS -->
+<link rel="stylesheet" href="css/owl-carousel.css">
+<!-- Datepicker CSS -->
+<link rel="stylesheet" href="css/datepicker.css">
+<!-- Animate CSS -->
+<link rel="stylesheet" href="css/animate.min.css">
+<!-- Magnific Popup CSS -->
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<!-- Medipro CSS -->
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/responsive.css">
+
+</head>
+
+<body>
+    <!-- Header Area -->
+	<header class="header" >
+		<!-- Header Inner -->
+		<div class="topbar">
+			<div class="container">
+				<div class="row">
+					<!-- Start Logo -->
+					<div class="logo">
+						<a><img src="img/logo.png" alt="#"></a>
+					</div>
+					<!-- End Logo -->		
+				</div>
+			</div>
+		</div>
+		<!--/ End Header Inner -->
+	</header>
+	<!-- End Header Area -->
+
+    
+
+    <!-- Start Recherche -->
+	<section class="bloc" style="background-color:#f2f5f7;">
+
+        <!-- Start Alert -->
+	    <div id="alerteDanger" class="alert alert-danger" style="display: none;">
+            <i class="fa fa-exclamation-triangle"></i>
+            <span id="alerteMessageDanger"></span>
+        </div>
+        <div id="alerteSuccess" class="alert alert-success" style="display: none;">
+            <i class="fa fa-check"></i>
+            <span id="alerteMessageSuccess"></span>
+        </div>
+        <!-- /End Alert -->
+
+		<div class="container">
+				<div class="row justify-content-md-center"> 
+					<div class="col-lg-10">
+						<div class="bloc-form">
+							<h2>Recherche</h2>
+							<!-- Form -->
+							<div class="form" >
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<input type="text" id="lieu" name="lieu" placeholder="Où ?" tabindex="1" required="">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+                                               <div class="nice-select form-control wide" tabindex="2" required=""><span class="current">Groupe</span>
+                                                   <ul class="list" id="groupesListe">
+                                                        <li  th:value=0 class="option" onclick="fChangementGroupe(this.value);"></li>
+                                                        <li  th:each="groupe: ${groupes}" th:value="${groupe.id}" th:text="${groupe.libelle}" class="option" onclick="fChangementGroupe(this.value);"></li>
+                                                   </ul>
+                                               </div>
+                                           </div>
+									</div>
+                                    <div class="col-lg-6">
+										<div class="form-group">
+                                               <div class="nice-select form-control wide" tabindex="3" required="" id="specialitesSelect" ><span class="current" id="specialiteCourante" >Spécialité</span>
+                                                   <ul class="list" id="specialitesListe">
+                                                   </ul>
+                                               </div>
+                                           </div>
+									</div>
+									<div class="col-6" style="display: block; margin: 0 auto;" >
+										<div class="form-group login-btn">
+											<button class="btn" onclick="fRechercheHopital();" >Rechercher</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--/ End Form -->
+					    </div>
+				    </div>
+			    </div>
+	    </div>
+    </section>
+	<!--/ End Recherche -->
+
+    <!-- Start Hopital -->
+	<section class="bloc" id="hopital" style="display:none; padding-top:50px;">
+		<div class="container">
+			<div class="row justify-content-md-center"> 
+				<div class="col-lg-6 col-6 inner">				
+					<div class="bloc-form">
+						<h2 id="hopitalNom"></h2>
+                        <ul class="list" style="margin-bottom: 20px;">
+                            <li><i class="fa fa-map-marker" style="margin-right: 5px; color: #1A76D1;"></i> <span id="hopitalAdresse"></span></li>
+                            <li><i class="fa fa-phone" style="margin-right: 5px; color: #1A76D1;"></i><span id="hopitalTelephone"></span></li>
+                        </ul>
+                        <button class="btn" type="submit" style="display: block; margin: 0 auto;" onclick="fReservationLit();">Réserver un lit</button>
+                        <span style="display:none;" id="hopitalId" value="0"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--/ End Hopital -->
+
+    <!-- Start Aucun résultat -->
+	<section class="bloc" id="aucunResultat" style="display:none;padding-top:50px;">
+		<div class="container">
+			<div class="row justify-content-md-center">
+                <p>Aucun hôpital ne correspond à votre recherche</p>
+			</div>
+		</div>
+	</section>
+	<!--/ End Aucun résultat -->
+	
+    <!-- Footer Area -->
+    <footer id="footer" class="footer">
+	    <!-- Copyright -->
+	    <div class="copyright">
+		    <div class="container">
+			    <div class="row">
+				    <div class="col-lg-12 col-12">
+					    <div class="copyright-content">
+						    <p>© Copyright 2018  |  All Rights Reserved by <a href="https://www.wpthemesgrid.com" target="_blank">wpthemesgrid.com</a> </p>
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+	    </div>
+	    <!--/ End Copyright -->
+    </footer>
+    <!--/ End Footer Area -->
+    
+    <!-- jquery Min JS -->
+    <script src="js/jquery.min.js"></script>
+    <!-- jquery Migrate JS -->
+    <script src="js/jquery-migrate-3.0.0.js"></script>
+    <!-- jquery Ui JS -->
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- Easing JS -->
+    <script src="js/easing.js"></script>
+    <!-- Color JS -->
+    <script src="js/colors.js"></script>
+    <!-- Popper JS -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap Datepicker JS -->
+    <script src="js/bootstrap-datepicker.js"></script>
+    <!-- Jquery Nav JS -->
+    <script src="js/jquery.nav.js"></script>
+    <!-- Slicknav JS -->
+    <script src="js/slicknav.min.js"></script>
+    <!-- ScrollUp JS -->
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <!-- Niceselect JS -->
+    <script src="js/niceselect.js"></script>
+    <!-- Tilt Jquery JS -->
+    <script src="js/tilt.jquery.min.js"></script>
+    <!-- Owl Carousel JS -->
+    <script src="js/owl-carousel.js"></script>
+    <!-- counterup JS -->
+    <script src="js/jquery.counterup.min.js"></script>
+    <!-- Steller JS -->
+    <script src="js/steller.js"></script>
+    <!-- Wow JS -->
+    <script src="js/wow.min.js"></script>
+    <!-- Magnific Popup JS -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <!-- Counter Up CDN JS -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+
+    <script type="text/javascript" >
+
+        // Affichage d'un message d'alerte
+        // type = 0 pour cacher les messages
+        // type = 1 pour afficher un message de danger
+        // type = 2 pour afficher un message de succès
+        function fAlerte(type=0, message =''){
+
+            switch(type){
+                case 0:
+                    $('#alerteSuccess').hide();
+                    $('#alerteDanger').hide();
+                    break;
+                case 1 : 
+                    $('#alerteSuccess').hide();
+                    $('#alerteMessageDanger').text(message);
+                    $('#alerteDanger').show();
+                    break;
+                case 2 : 
+                    $('#alerteDanger').hide();
+                    $('#alerteMessageSuccess').text(message);
+                    $('#alerteSuccess').show();
+                    break;  
+            };
+        }
+        //Recherche des spécialités du groupe sélectionné, appelée lors d'un changement de sélection de groupe
+        function fChangementGroupe(idGroupe) {
+            // On remet à zéro la liste de spécialités et le champ d'alerte
+            $('#specialitesListe').empty();
+            $('#specialiteCourante').empty();
+            fAlerte();
+
+            // Si aucun groupe est sélectionné -> on rend inaccessible la sélection de spécialités et on quitte la fonction
+            if(idGroupe==0){
+                $("#specialitesSelect").prop("disabled", true);
+                return '';
+            } else { // Si un groupe est sélectionné -> on rend accessible la sélection de spécialités
+                $("#specialitesSelect").prop("disabled", false);
+            }
+           
+            // On recherche ensuite la liste des spécialités pour remplir le champ
+            $.ajax({
+                method: "GET",
+                contentType: "application/json",
+                url: "/specialites/"+idGroupe,
+                success: function (data) {
+                    // On met un premier champ vide pour qu'il soit possible de ne pas choisir de spécialité
+                    $('#specialitesListe').append('<li value=0 class="option"></li>');
+
+                    // On ajoute toutes les spécialités dans le champ de sélection
+                    data.result.forEach(function(specialite) {
+                        $('#specialitesListe').append('<li value='+ specialite.id +' class="option" >' + specialite.libelle + '</li>');
+                    });
+                },
+                error: function () {
+                    fAlerte(1,'Erreur lors du chargement des spécialités');
+                }
+            });
+        }
+
+        
+        //Recherche des hopitaux correspondant à la demande
+        function fRechercheHopital() {
+            // On cache le champ d'alerte, le bloc d'hopital et le bloc aucun résultat
+            fAlerte();
+            $('#hopital').hide();
+            $('#aucunResultat').hide();
+
+            // On vérifie que les champs obligatoires sont renseignés
+            var lieu, groupe, specialite;
+
+            lieu = $('#lieu').val();
+            if(lieu ==''){
+                fAlerte(1,'Veuillez renseigner un lieu');
+                return;
+            }
+
+            idGroupe = $('#groupesListe .selected').val();
+            if(idGroupe==undefined || idGroupe==0){
+                fAlerte(1,'Veuillez sélectionner un groupe de spécialités');
+                return;
+            }
+
+            // Si aucune spécialité n'est sélectionnée on prend le groupe
+            idSpecialite = $('#specialitesListe .selected').val();
+            if(idSpecialite==undefined || idSpecialite==0){
+                idSpecialite = idGroupe
+            }
+
+            // On recherche ensuite la liste des hôpitaux qui correspondent à la recherche
+            $.ajax({
+                method: "GET",
+                contentType: "application/json",
+                url: "/hopital/"+idSpecialite+"/"+lieu,
+                success: function (data) {
+                    // Si des hôpitaux ont été trouvés on affiche l'hôpital
+                    if(data.result != null){
+                        var hopital = data.result;
+
+                        $('#hopitalNom').text(hopital.nom);
+                        $('#hopitalAdresse').text(hopital.adresse + ', ' + hopital.cp + ' ' + hopital.ville);
+                        $('#hopitalTelephone').text(hopital.telephone);
+                        $('#hopitalId').val(hopital.id);
+                        $('#hopital').show();
+                    } else { // Sinon on renseigne qu'il n'y a pas de résultat
+                        $('#aucunResultat').show();
+                    }
+                    
+                },
+                error: function () {
+                    fAlerte(1,'Erreur lors de la recherche');
+                }
+            });
+                      
+        }
+
+        //Réservation d'un lit
+        function fReservationLit(){
+            fAlerte();
+            
+            var idHopital = $('#hopitalId').val();
+
+            // On recherche ensuite la liste des hôpitaux qui correspondent à la recherche
+            $.ajax({
+                method: "POST",
+                contentType: "application/json",
+                url: "/reservation/"+idHopital,
+                success: function (data) {
+                    // Si la réservation a été effectuée
+                    if(data.result != undefined ){
+                        fAlerte(2,'Réservation effectuée avec succès : '+ data.result.nom);
+                    } else { // Sinon on renseigne qu'il y a eu une erreur
+                        fAlerte(1,'Echec de la réservation');
+                    }
+                    
+                },
+                error: function () {
+                    fAlerte(1,'Erreur lors de la réservation');
+                }
+            });
+        }
+
+    </script>
+
+
+
+</body>
+
+
+
+
+</html>
