@@ -24,6 +24,7 @@ git clone https://github.com/ClementineAllard/medhead.git
 Api : http://localhost:8080
 
 WebApp : http://localhost:8081
+Compte Admin : email= admin, mdp= admin
 
 ## Base de données 
 Port : 9000
