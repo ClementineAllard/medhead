@@ -29,7 +29,7 @@ public class HopitalService {
 
 
     /**
-     * Récupération de toutes les hôpitaux
+     * Récupération de tous les hôpitaux
      * @return liste des hôpitaux
      */
     public Iterable<Hopital> getHopitaux() {
@@ -48,7 +48,7 @@ public class HopitalService {
 
     /**
      * Enregistrement d'un nouvel hôpital
-     * @param specialite - hôpital à enregistrer
+     * @param hopital - hôpital à enregistrer
      * @return l'hôpital qui a été créé
      */
     public Hopital saveHopital(Hopital hopital) {

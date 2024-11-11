@@ -62,9 +62,9 @@ public class SpecialiteControllerTest {
 
     @Test
     @Order(2)
-    public void testIsertionSpecialite() throws Exception{
+    public void testInsertionSpecialite() throws Exception{
         // Spécialité fictive pour le test
-        specialite.setLibelle("Groupe de test");
+        specialite.setLibelle("Spécialité de test");
         specialite.setParent(groupe.getId());
 
         // Conversion de l'objet en Json
