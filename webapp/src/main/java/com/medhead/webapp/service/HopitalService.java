@@ -20,7 +20,7 @@ public class HopitalService {
      * @param id - Id de l'hôpital à modifier
 	 * @return hopital modifié
 	 */
-	public Hopital postReservationLit(final Long id) {
-		return hopitalProxy.postReservationLit(id);
+	public Hopital updateReservationLit(final Long id) {
+		return hopitalProxy.updateReservationLit(id);
 	}
 }

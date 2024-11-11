@@ -24,7 +24,7 @@ public class HopitalProxy {
      * @param id - Id de l'hôpital à modifier
 	 * @return hopital modifié
 	 */
-	public Hopital postReservationLit(final Long id) {
+	public Hopital updateReservationLit(final Long id) {
 		// Appel à l'API
 		String baseApiUrl = props.getApiUrl();
 		String putReservationUrl = baseApiUrl + "/hopital/reservation/" + id;
