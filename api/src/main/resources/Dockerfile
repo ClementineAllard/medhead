@@ -1,20 +1,25 @@
-# Utilise une image Maven pour compiler le projet
+# Image Maven pour compiler le projet
 FROM maven:3.8.5-openjdk-17 AS build
+
+# Répertoire de travail
 WORKDIR /api
 
-# Copier le projet et le compiler
-COPY . .
+# Copie du projet
+COPY . /api
+
+# Compilation du projet
+RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
-# Utiliser une image JDK pour exécuter l'application
+# Image JDK pour exécuter l'application
 FROM openjdk:17-jdk-slim
 WORKDIR /api
 
-# Copier l'artefact généré depuis l'étape précédente
+# Copie de l'artefact généré depuis l'étape précédente
 COPY --from=build /api/target/*.jar api.jar
 
-# Exposer le port
+# Exposition du port
 EXPOSE 8080
 
-# Lancer l'application
+# Lancement l'application
 ENTRYPOINT ["java", "-jar", "app.jar"]
