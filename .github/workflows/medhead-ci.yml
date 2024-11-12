@@ -37,7 +37,7 @@ jobs:
 
       # Build Docker image
       - name: Build Docker image
-        run: docker build -t medhead-api:latest -f ./api/src/main/resources/Dockerfile .
+        run: docker build -t medhead-api:latest .
 
       # Tag Docker image
       - name: Tag Docker image
