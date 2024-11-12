@@ -8,7 +8,7 @@ WORKDIR /api
 COPY . /api
 
 # Compilation du projet
-RUN chmod +x ./mvnw
+RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
 # Image JDK pour exécuter l'application
