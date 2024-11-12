@@ -95,9 +95,9 @@ public class SpecialisationController {
      * @param idSpecialite - id de la spécialité critère de la recherche
      * @return les spécialisations correspondant à la recherche
      */
-	@GetMapping("/specialisation/recherche/{id}")
-	public Iterable<Specialisation> getSpecialisationBySpecialite(@PathVariable("id") final Long idSpecialite) {
-		return specialisationService.getSpecialisationBySpecialite(idSpecialite);
+	@GetMapping("/specialisation/recherche/{specialite}")
+	public Iterable<Specialisation> getSpecialisationBySpecialite(@PathVariable("specialite") final Long specialite) {
+		return specialisationService.getSpecialisationBySpecialite(specialite);
 	}
 
 

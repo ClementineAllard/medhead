@@ -1,6 +1,5 @@
 package com.medhead.api.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +59,10 @@ public class SpecialisationService {
 
     /**
      * Récupération des spécialisations correspondant à une spécialité et à des hôpitaux ayant des lits disponibles
-     * @param idSpecialite - id de la spécialité critère de la recherche
+     * @param specialite - id de la spécialité critère de la recherche
      * @return les spécialisations correspondant à la recherche
      */
-    public List<Specialisation> getSpecialisationBySpecialite(Long idSpecialite) {
-        return specialisationRepository.findSpecialisationBySpecialite(idSpecialite);
+    public Iterable<Specialisation> getSpecialisationBySpecialite(Long specialite) {
+        return specialisationRepository.findSpecialisationBySpecialite(specialite);
     }
 }
