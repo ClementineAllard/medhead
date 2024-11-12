@@ -2,10 +2,10 @@
 FROM maven:3.8.5-openjdk-17 AS build
 
 # Répertoire de travail
-WORKDIR /api
+WORKDIR /app
 
 # Copie du projet
-COPY . /api
+COPY . /app
 
 # Compilation du projet
 RUN chmod +x ./api/mvnw
@@ -13,10 +13,10 @@ RUN ./api/mvnw clean package -DskipTests
 
 # Image JDK pour exécuter l'application
 FROM openjdk:17-jdk-slim
-WORKDIR /api
+WORKDIR /app
 
 # Copie de l'artefact généré depuis l'étape précédente
-COPY --from=build /api/target/*.jar api.jar
+COPY --from=build /app/target/*.jar api.jar
 
 # Exposition du port
 EXPOSE 8080
