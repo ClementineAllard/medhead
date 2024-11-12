@@ -33,7 +33,7 @@ jobs:
       
       # Compiles the api
       - name: compilation api
-        run: ./mvnw compile
+        run: ./mvnw clean install
         working-directory: ./api
 
       - name: Grant execute permission for Maven wrapper
@@ -41,7 +41,7 @@ jobs:
         
       # Compiles the webapp
       - name: compilation webapp
-        run: ./mvnw compile
+        run: ./mvnw clen install
         working-directory: ./webapp
 
       #  Log in to Docker 
@@ -57,7 +57,7 @@ jobs:
 
       # Tag Docker image
       - name: Tag Docker image
-        run: docker tag medhead-api:latest docker.io/${{ secrets.DOCKER_USERNAME }}/mon-application-spring-boot:latest
+        run: docker tag medhead-api:latest docker.io/${{ secrets.DOCKER_USERNAME }}/medhead-api:latest
 
       # Push Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
