@@ -11,7 +11,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /api
 
 # Copier l'artefact généré depuis l'étape précédente
-COPY --from=build /api/target/*.jar app.jar
+COPY --from=build /api/target/*.jar api.jar
 
 # Exposer le port
 EXPOSE 8080
