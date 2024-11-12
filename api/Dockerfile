@@ -8,7 +8,6 @@ WORKDIR /app
 COPY . /app
 
 # Compilation du projet
-RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
 # Image JDK pour exécuter l'application
