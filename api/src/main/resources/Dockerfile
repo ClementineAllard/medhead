@@ -9,7 +9,7 @@ COPY . /api
 
 # Compilation du projet
 RUN chmod +x ./api/mvnw
-RUN ./api/mvnw clean package -DskipTests
+RUN ./mvnw clean package -DskipTests
 
 # Image JDK pour exécuter l'application
 FROM openjdk:17-jdk-slim
