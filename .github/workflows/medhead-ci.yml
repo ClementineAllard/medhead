@@ -53,12 +53,12 @@ jobs:
 
       # Build Docker image
       - name: Build Docker image
-        run: docker build -t medhead:latest .
+        run: docker build -t medhead-api:latest -f ./api/src/main/ressource/Dockerfile .
 
       # Tag Docker image
       - name: Tag Docker image
-        run: docker tag medhead:latest docker.io/${{ secrets.DOCKER_USERNAME }}/mon-application-spring-boot:latest
+        run: docker tag medhead-api:latest docker.io/${{ secrets.DOCKER_USERNAME }}/mon-application-spring-boot:latest
 
       # Push Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
-        run: docker push docker.io/${{ secrets.DOCKER_USERNAME }}/medhead:latest
+        run: docker push docker.io/${{ secrets.DOCKER_USERNAME }}/medhead-api:latest
