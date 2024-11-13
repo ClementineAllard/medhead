@@ -1,25 +1,21 @@
 
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push request events but only for the "main" branch
+  # Lancement du workflow à chaque push sur la branche main
   push:
     branches: [ "main" ]
 
-  # Allows to run this workflow manually from the Actions tab
+  # Autorisation de lancer manuellement le workflow
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# Actions du workflow
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  # Compilation api
+  build-api:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out 
       - uses: actions/checkout@v4
 
       - name: Set up JDK 17
@@ -31,30 +27,79 @@ jobs:
       - name: Grant execute permission for Maven wrapper
         run: chmod +x ./api/mvnw
       
-      # Compiles the api
-      - name: compilation api
+      # Compilation de l'api
+      - name: package api
         run: ./mvnw clean package -DskipTests
         working-directory: ./api
+        
+  # Packaging Docker
+  docker-api:
+    runs-on: ubuntu-latest
 
-      - name: List target directory
-        run: ls -la ./target
-        working-directory: ./api
+    steps:
           
-      #  Log in to Docker 
-      - name: Log in to Docker Hub
+      #  Connexion Docker
+      - name: Connexion Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Build Docker image
+      # Création image Docker
       - name: Build Docker image
         run: docker build -t medhead-api:latest -f ./api/Dockerfile .
 
-      # Tag Docker image
+      # Tag image Docker
       - name: Tag Docker image
         run: docker tag medhead-api:latest ${{ secrets.DOCKER_USERNAME }}/medhead-api:latest
 
-      # Push Docker image to Docker Hub
+      # Envoi image à Docker Hub
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/medhead-api:latest
+        
+  # Compilation web application
+  build-webapp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          
+      - name: Grant execute permission for Maven wrapper
+        run: chmod +x ./webapp/mvnw
+      
+      # Compilation de l'application
+      - name: package webapp
+        run: ./mvnw clean package -DskipTests
+        working-directory: ./webapp
+        
+  # Packaging Docker
+  docker-webapp:
+    runs-on: ubuntu-latest
+
+    steps:
+          
+      #  Connexion Docker
+      - name: Connexion Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Création image Docker
+      - name: Build Docker image
+        run: docker build -t medhead-webapp:latest -f ./webapp/Dockerfile .
+
+      # Tag image Docker
+      - name: Tag Docker image
+        run: docker tag medhead-webapp:latest ${{ secrets.DOCKER_USERNAME }}/medhead-webapp:latest
+
+      # Envoi image à Docker Hub
+      - name: Push Docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/medhead-webapp:latest
+
