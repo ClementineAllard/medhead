@@ -28,7 +28,7 @@ jobs:
         run: chmod +x ./api/mvnw
       
       # Compilation de l'api
-      - name: package api
+      - name: Compiles api
         run: ./mvnw clean package -DskipTests
         working-directory: ./api
         
@@ -71,7 +71,7 @@ jobs:
         run: chmod +x ./webapp/mvnw
       
       # Compilation de l'application
-      - name: package webapp
+      - name: Compiles webapp
         run: ./mvnw clean package -DskipTests
         working-directory: ./webapp
         
