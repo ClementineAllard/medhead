@@ -19,7 +19,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Checks-out 
       - uses: actions/checkout@v4
 
       - name: Set up JDK 17
@@ -45,12 +45,12 @@ jobs:
 
       # Build Docker image
       - name: Build Docker image
-        run: docker build -t medhead-api:latest -f ./api/Dockerfile .
+        run: docker build -t medhead-api:latest .
 
       # Tag Docker image
       - name: Tag Docker image
-        run: docker tag medhead-api:latest docker.io/${{ secrets.DOCKER_USERNAME }}/medhead-api:latest
+        run: docker tag medhead-api:latest ${{ secrets.DOCKER_USERNAME }}/medhead-api:latest
 
       # Push Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
-        run: docker push docker.io/${{ secrets.DOCKER_USERNAME }}/medhead-api:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/medhead-api:latest
