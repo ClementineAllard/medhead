@@ -35,6 +35,10 @@ jobs:
       - name: compilation api
         run: ./mvnw clean package -DskipTests
         working-directory: ./api
+
+      - name: List target directory
+        run: ls -la ./target
+        working-directory: ./api
           
       #  Log in to Docker 
       - name: Log in to Docker Hub
