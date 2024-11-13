@@ -45,6 +45,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: List target directory
+        run: ls -la ./api
+
       # Création image Docker
       - name: Build Docker image
         run: docker build -t medhead-api:latest -f ./api/Dockerfile .
