@@ -27,7 +27,7 @@ jobs:
 
       # Compilation de l'api
       - name: install api
-        run: ./mvnw clean install
+        run: ./mvnw clean install -DskipTests
         working-directory: ./api
       
       # Test l'api
