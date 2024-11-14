@@ -24,6 +24,11 @@ jobs:
 
       - name: Grant execute permission for Maven wrapper
         run: chmod +x ./api/mvnw
+
+      # Compilation de l'api
+      - name: install api
+        run: ./mvnw clean install
+        working-directory: ./api
       
       # Test l'api
       - name: tests api
