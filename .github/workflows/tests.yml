@@ -2,7 +2,7 @@ name: Tests
 on:
   # Lancement du workflow à chaque push sur la branche main
   push:
-    branches: [ "dev" ]
+    branches: [ "main" ]
 
   # Autorisation de lancer manuellement le workflow
   workflow_dispatch:
