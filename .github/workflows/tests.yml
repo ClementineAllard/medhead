@@ -27,7 +27,7 @@ jobs:
       
       # Test l'api
       - name: tests api
-        run: ./mvnw test
+        run: ./mvnw clean verify
         working-directory: ./api
 
       - name: Grant execute permission for Maven wrapper
@@ -35,5 +35,5 @@ jobs:
         
       # Test l'application web
       - name: test webapp
-        run: ./mvnw test
+        run: ./mvnw clean verify
         working-directory: ./webapp
