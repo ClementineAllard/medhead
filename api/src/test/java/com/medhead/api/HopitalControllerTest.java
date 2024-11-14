@@ -20,12 +20,10 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.medhead.api.model.Hopital;
-import org.springframework.test.context.ActiveProfiles;
 
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 @TestMethodOrder(OrderAnnotation.class) 
 public class HopitalControllerTest {
 
