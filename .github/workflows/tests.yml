@@ -12,7 +12,11 @@ jobs:
   # Tests du système
   tests:
     runs-on: ubuntu-latest
-
+    env:
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:9000/medheaddb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      
     steps:
       - uses: actions/checkout@v4
 
@@ -24,11 +28,6 @@ jobs:
 
       - name: Grant execute permission for Maven wrapper
         run: chmod +x ./api/mvnw
-
-      # Compilation de l'api
-      - name: install api
-        run: ./mvnw clean install -DskipTests
-        working-directory: ./api
       
       # Test l'api
       - name: tests api
