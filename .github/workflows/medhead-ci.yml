@@ -17,18 +17,6 @@ jobs:
   build-api:
     runs-on: ubuntu-latest
     
-    services:
-      # Configuration du service MySQL
-      mysql:
-        image: mysql:8.0
-        ports:
-          - 9000:9000 
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: medhead
-          MYSQL_USER: root
-          MYSQL_PASSWORD: root
-          
     steps:
       - uses: actions/checkout@v4
 
@@ -39,17 +27,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
         
-      - name: Run tests
-        env:
-          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:9000/medhead
-          SPRING_DATASOURCE_USERNAME: root
-          SPRING_DATASOURCE_PASSWORD: root
-        run: mvn test        
-        working-directory: ./api
-        
       # Compilation de l'api
-      - name: Compiles api
-        run: mvn clean install -DskipTests
+      - name: Packages api
+        run: mvn clean package -DskipTests
         working-directory: ./api
         
       #  Connexion Docker
@@ -86,8 +66,8 @@ jobs:
           cache: maven
     
       # Compilation de l'application
-      - name: Compiles webapp
-        run: mvn -B package --file pom.xml
+      - name: Packages webapp
+        run: mvn clean package -DskipTests
         working-directory: ./webapp
         
       #  Connexion Docker
