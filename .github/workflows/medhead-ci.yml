@@ -26,10 +26,17 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      
+          
+      - name: Run tests
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:9000/medhead
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: root
+        run: mvn test
+        
       # Compilation de l'api
       - name: Compiles api
-        run: mvn -B package --file pom.xml
+        run: mvn clean install -DskipTests
         working-directory: ./api
         
       #  Connexion Docker
