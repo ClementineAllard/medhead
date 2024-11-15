@@ -23,13 +23,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          
-      - name: Grant execute permission for Maven wrapper
-        run: chmod +x ./api/mvnw
+          cache: maven
       
       # Compilation de l'api
       - name: Compiles api
-        run: ./mvnw clean package -DskipTests
+        run: mvn --batch-mode package
         working-directory: ./api
         
       #  Connexion Docker
