@@ -2,8 +2,10 @@
 name: CI
 
 on:
-  # Lancement du workflow à chaque push sur la branche main
+  # Lancement du workflow à chaque push ou pull sur la branche main
   push:
+    branches: [ "main" ]
+  pull_request:
     branches: [ "main" ]
 
   # Autorisation de lancer manuellement le workflow
@@ -27,7 +29,7 @@ jobs:
       
       # Compilation de l'api
       - name: Compiles api
-        run: mvn --batch-mode package
+        run: mvn -B package --file pom.xml
         working-directory: ./api
         
       #  Connexion Docker
@@ -36,9 +38,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: List target directory
-        run: ls -la ./api
 
       # Création image Docker
       - name: Build Docker image
@@ -64,13 +63,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          
-      - name: Grant execute permission for Maven wrapper
-        run: chmod +x ./webapp/mvnw
-      
+          cache: maven
+    
       # Compilation de l'application
       - name: Compiles webapp
-        run: ./mvnw clean package -DskipTests
+        run: mvn -B package --file pom.xml
         working-directory: ./webapp
         
       #  Connexion Docker
