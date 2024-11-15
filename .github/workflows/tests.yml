@@ -1,9 +1,11 @@
 name: Tests
 on:
-  # Lancement du workflow à chaque push sur la branche main
+  # Lancement du workflow à chaque push ou pull sur la branche main
   push:
     branches: [ "main" ]
-
+  pull_request:
+    branches: [ "main" ]
+    
   # Autorisation de lancer manuellement le workflow
   workflow_dispatch:
 
@@ -12,11 +14,7 @@ jobs:
   # Tests du système
   tests:
     runs-on: ubuntu-latest
-    env:
-      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:9000/medheaddb
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-      
+    
     steps:
       - uses: actions/checkout@v4
 
@@ -25,19 +23,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-
-      - name: Grant execute permission for Maven wrapper
-        run: chmod +x ./api/mvnw
+          cache: maven
       
       # Test l'api
       - name: tests api
-        run: ./mvnw clean verify
+        run: mvn test
         working-directory: ./api
-
-      - name: Grant execute permission for Maven wrapper
-        run: chmod +x ./webapp/mvnw
         
       # Test l'application web
       - name: test webapp
-        run: ./mvnw clean verify
+        run: mvn test
         working-directory: ./webapp
