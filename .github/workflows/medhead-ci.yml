@@ -16,7 +16,19 @@ jobs:
   # Compilation api
   build-api:
     runs-on: ubuntu-latest
-
+    
+    services:
+      # Configuration du service MySQL
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 9000:9000 
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: medhead
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+          
     steps:
       - uses: actions/checkout@v4
 
@@ -26,7 +38,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-          
+        
       - name: Run tests
         env:
           SPRING_DATASOURCE_URL: jdbc:mysql://localhost:9000/medhead
