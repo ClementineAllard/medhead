@@ -1,0 +1,585 @@
+{
+	"info": {
+		"_postman_id": "714be4c6-b087-4349-8f1b-5e0fc3a2e9ab",
+		"name": "MedHead Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39656444"
+	},
+	"item": [
+		{
+			"name": "Hopital",
+			"item": [
+				{
+					"name": "createHopital",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Hôpital Test\",\r\n    \"adresse\": \"12 Rue des Tests\",\r\n    \"ville\": \"Paris\",\r\n    \"cp\": \"75015\",\r\n    \"pays\": \"FR\",\r\n    \"telephone\": \"01 40 23 45 67\",\r\n    \"nbLit\": 120\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/hopital",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"hopital"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHopital",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/hopital/44",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"hopital",
+								"44"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHopitaux",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/hopitaux",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"hopitaux"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateHopital",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Hôpital modifié Test\",\r\n    \"adresse\": \"12 Rue des Tests modifiés\",\r\n    \"ville\": \"Paris\",\r\n    \"cp\": \"75015\",\r\n    \"pays\": \"FR\",\r\n    \"telephone\": \"01 40 23 45 68\",\r\n    \"nbLit\": 130\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/hopital/44",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"hopital",
+								"44"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateReservationLit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/hopital/reservation/44",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"hopital",
+								"reservation",
+								"44"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteHopital",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/hopital/44",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"hopital",
+								"44"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Specialisation",
+			"item": [
+				{
+					"name": "createSpecialisation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"hopital\": {\r\n        \"id\": 1\r\n    },\r\n    \"specialite\": {\r\n        \"id\": 40\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/specialisation",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialisation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecialisation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/specialisation/99",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialisation",
+								"99"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecialisations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/specialisations",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialisations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSpecialisation",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"hopital\": {\r\n        \"id\": 1\r\n    },\r\n    \"specialite\": {\r\n        \"id\": 41\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/specialisation/99",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialisation",
+								"99"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSpecialisation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/specialisation/99",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialisation",
+								"99"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecialisationBySpecialite",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/specialisation/recherche/1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialisation",
+								"recherche",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Specialite",
+			"item": [
+				{
+					"name": "createSpecialite",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"libelle\": \"Spécialité de test\",\r\n    \"parent\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/specialite",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecialite",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/specialite/1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialite",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecialites",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/specialites",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSpecialite",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"libelle\": \"Spécialité modifiée\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/specialite/117",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialite",
+								"117"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSpecialite",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/specialite/117",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialite",
+								"117"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGroupes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/specialite/groupes",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialite",
+								"groupes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecialitesByParent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/specialites/1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"specialites",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Utilisateur",
+			"item": [
+				{
+					"name": "createUtilisateur",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@mail.com\",\r\n    \"prenom\": \"Test\",\r\n    \"nom\": \"Postman\",\r\n    \"mdp\": \"mdpTest\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/utilisateur/{{cleCryptage}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"utilisateur",
+								"{{cleCryptage}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUtilisateur",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/utilisateur/2",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"utilisateur",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUtilisateurs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/utilisateurs",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"utilisateurs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUtilisateur",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test2@mail.com\",\r\n    \"prenom\": \"Test2\",\r\n    \"nom\": \"Postman2\",\r\n    \"mdp\": \"mdpTest2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/utilisateur/2/{{cleCryptage}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"utilisateur",
+								"2",
+								"{{cleCryptage}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUtilisateur",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/utilisateur/2",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"utilisateur",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verifConnexion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/utilisateur/connexion/test@mail.com/mdpTest/{{cleCryptage}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"utilisateur",
+								"connexion",
+								"test@mail.com",
+								"mdpTest",
+								"{{cleCryptage}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "apiUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "cleCryptage",
+			"value": "CLE_CRYPTAGE_POSTMAN",
+			"type": "string"
+		}
+	]
+}

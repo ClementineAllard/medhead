@@ -54,7 +54,7 @@ public class SpecialisationController {
     * @return la liste des spécialisations
     */
     @GetMapping("/specialisations")
-    public Iterable<Specialisation> getSpecialisation() {
+    public Iterable<Specialisation> getSpecialisations() {
         return specialisationService.getSpecialisations();
     }
 

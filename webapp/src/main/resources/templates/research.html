@@ -334,7 +334,7 @@
 
             // On recherche ensuite la liste des hôpitaux qui correspondent à la recherche
             $.ajax({
-                method: "POST",
+                method: "PUT",
                 contentType: "application/json",
                 url: "/reservation/"+idHopital,
                 success: function (data) {
