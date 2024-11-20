@@ -4,6 +4,7 @@ services:
     ports:
       - "9000:9000"
     environment:
+      - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
       - MYSQL_DATABASE=medheadbd
